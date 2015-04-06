@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>60</x>
+      <y>30</y>
+      <w>1670</w>
+      <h>1230</h>
+    </coordinates>
+    <panel_attributes>Map
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>60</y>
+      <w>280</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>
+GameMap
+--
+-tiles: Tile[][]
+--
++canPass(entity, Location): boolean
++touch(entity, Location): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1030</x>
+      <y>60</y>
+      <w>480</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>
+ItemMap
+--
+-items: Collection&lt;Location, Item&gt;
+--
++add(item, location)
++touch(entity, location): void // adds item if it can and removes it from map 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>240</y>
+      <w>280</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>{{ Abstract }}
+Tile
+--
+-tileView: TileView
+--
++isPassable(Entity): boolean
++touch(Entity): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>700</x>
+      <y>410</y>
+      <w>280</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>
+AirPassableTile
+--
+--
++isPassable(Entity): boolean
++touch(Entity): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>390</x>
+      <y>410</y>
+      <w>280</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>
+ImpassableTile
+--
+--
++isPassable(Entity): boolean
++touch(Entity): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>410</y>
+      <w>280</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>
+PassableTile
+--
+--
++isPassable(Entity): boolean
++touch(Entity): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>340</y>
+      <w>70</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>320</x>
+      <y>340</y>
+      <w>100</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>340</y>
+      <w>360</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;340.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>160</x>
+      <y>160</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+</diagram>
