@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>650</x>
+      <y>200</y>
+      <w>210</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>{abstract}
+/Item/
+--
+- itemView: ItemView
+- info: String
+--
++ isBlocking(): Boolean
+...
+--
+Responsibilities
+-- Potentially Impede Movement
+   of an Entity
+-- Default Behavior is to be
+   Nonblocking in regards to 
+   movement</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>740</x>
+      <y>410</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>430</y>
+      <w>210</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;70.0;10.0;10.0;190.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>740</x>
+      <y>430</y>
+      <w>230</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>210.0;70.0;210.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>850</x>
+      <y>500</y>
+      <w>210</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>ObstacleItem
+--
+
+--
++ isBlocking(): Boolean
+...
+--
+Responsibilities
+-- Always Blocks Entity
+	Movement</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>500</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>TakeableItem
+--
+
+--
++ isBlocking(): Boolean
+...
+--
+Responsibilities
+-- Never Blocks Entity
+   Movement
+-- Added to Inventory on Touch</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>940</x>
+      <y>420</y>
+      <w>390</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;370.0;20.0;370.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1200</x>
+      <y>500</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>InteractiveItem
+--
+-requiredItem: TakeableItem
+--
++ isBlocking(): Boolean
+...
+--
+Responsibilities
+-- Blocks Entity Movement 
+   UNLESS Entity has the 
+   requiredItem in its Inventory
+-- Having a 'Requirement'
+	TakeableItem</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>500</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>OneShotItem
+--
+
+--
++ isBlocking(): Boolean
+...
+--
+Responsibilities
+-- Never Blocks Entity
+   Movement
+-- Destroyed and Used on Touch</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>230</x>
+      <y>430</y>
+      <w>360</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;70.0;10.0;10.0;340.0;10.0</additional_attributes>
+  </element>
+</diagram>

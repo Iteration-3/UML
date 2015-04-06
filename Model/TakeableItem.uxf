@@ -14,8 +14,8 @@
 --
 - itemView: ItemView
 - info: String
-+ isPassable(): Boolean
 --
++ isBlocking(): Boolean
 + touch(Entity) : void
 + use(Entity) : void
 + getInfo(): String
@@ -38,6 +38,7 @@ Responsibilities
 + touch(Entity) : void
 + use(Entity) : void
 + getInfo(): String
++ isBlocking(): Boolean
 --
 Responsibilities
 -- Define Item that can be held
