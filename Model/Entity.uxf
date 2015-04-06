@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>30</x>
+      <y>20</y>
+      <w>1390</w>
+      <h>970</h>
+    </coordinates>
+    <panel_attributes>Entity
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>50</y>
+      <w>470</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>
+EntityManager
+--
+
+--
+
+-partyNpcs: List&lt;NPC&gt;
+-nonPartyNpcs: List&lt;NPC&gt;
+-avatar: Avatar
++update(): void //calls update on all entities
++addPartyNpc(npc: NPC)
++removePartyNPC(npc: NPC)
++getEntityAtLocation(location: Location): Entity // returns NULL if not found
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>700</x>
+      <y>80</y>
+      <w>270</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>{{abstract}}
+Entity
+--
+
+--
+-isFlying()
+-name: Name;
+-stats: Stats
+-move(Direction);
+-addItem(item: takeableItem): void
++removeItem(item: takeableItem): void
++equipItem(item: Item): void
++unequipItem(item: Item): void
++attack(): void
+#getDerivedStats(): EntityStatistics
+#getEntityView(): EntityView</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>380</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>
+NPC
+--
+
+--
+-behavior: Behavior
+-attackAbility: Ability
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>550</y>
+      <w>210</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>
+PET
+--
+
+--
+-behavior: Behavior</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>340</y>
+      <w>270</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>{{abstract}}
+Avatar
+--
+
+--
+-isFlying()
+-name: Name;
+-stats: Stats
+-move(Direction);
+-SkillManager: Skills
+-abilities: List&lt;Ability&gt;
+-addItem(item: takeableItem): void	
++removeItem(item: takeableItem): void
++equipItem(item: Item): void
++unequipItem(item: Item): void
++getKeyListeners() : Listeners
+#getDerivedStats(): EntityStatistics
+#getSkillManager(): SkillManager
+#getEntityView(): EntityView
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>520</y>
+      <w>280</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>
+Mount
+--
+
+--
+-behavior: Behavior
+-attackAbility: Ability
+-rider: Avatar
+-setRider(Avatar) //Mount contains rider,
+and rider is set by the mount in the 
+interaction dialog. 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>380</x>
+      <y>710</y>
+      <w>280</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>
+Smasher
+--
+
+--
++attack(): void
+#getSkillManager(): SmasherSkillManager
+#getEntityView(): SmasherView</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>710</x>
+      <y>700</y>
+      <w>290</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>
+Summoner
+--
+
+--
++attack(): void //Handles staff skill
++bane(): void
++boon(): void
++enchantment():void
+#getSkillManager(): SummonerSkillManager
+#getEntityView(): SummonerView</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1010</x>
+      <y>680</y>
+      <w>380</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>
+Sneak
+--
+
+--
++attack(): void //Handles skill rangedAttack
++creep(): void
++pickPocket():void
++detectTrap():void
++removeTrap(Trap t):void //detect trap will call remove trap
+on traps it finds. 
+#getSkillManager(): SneakSkillManager      
+#getEntityView(): SneakView</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>310</y>
+      <w>600</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>580.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>890</x>
+      <y>310</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>750</x>
+      <y>620</y>
+      <w>140</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>120.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>860</x>
+      <y>620</y>
+      <w>190</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;170.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>620</y>
+      <w>370</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>350.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>130</x>
+      <y>470</y>
+      <w>70</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>160</x>
+      <y>470</y>
+      <w>180</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>100</y>
+      <w>180</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+  </element>
+</diagram>
