@@ -19,7 +19,6 @@ DOWN_LEFT : 225
 DOWN : 270
 DOWN_RIGHT : 315 
 
-
 -theta : int
 --
 +getAngle() : int
