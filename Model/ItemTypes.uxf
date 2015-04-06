@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>670</x>
+      <y>200</y>
+      <w>210</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>{abstract}
+/Item/
+--
+- itemView: ItemView
+- info: String
+--
++ touch(Entity) : void
++ use(Entity) : void
++ getInfo(): String
+--
+Responsibilities
+-- Respond To Entity's Touch
+-- Have a use
+-- May be present on a Tile</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>410</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>590</x>
+      <y>430</y>
+      <w>210</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;70.0;10.0;10.0;190.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>380</x>
+      <y>430</y>
+      <w>240</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;70.0;10.0;10.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>430</y>
+      <w>260</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>240.0;70.0;240.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1000</x>
+      <y>430</y>
+      <w>360</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>340.0;70.0;340.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>500</y>
+      <w>210</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>ObstacleItem
+--
+
+--
++ touch(entity: Entity)
+--
+Responsibilities
+-- Makes Tile Impassable</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1230</x>
+      <y>500</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Door
+--
+-requiredItem: TakeableItem
+--
++ touch(entity: Entity)
++ use(entity: Entity)
+--
+Responsibilities
+-- Blocks Entity Movement 
+   UNLESS Entity has the 
+   requiredItem in its Inventory
+-- Having a 'Requirement'
+   TakeableItem</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>510</x>
+      <y>500</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>TakeableItem
+--
+
+--
++ touch(entity: Entity)
++ use(entity: Entity)
+--
+Responsibilities
+-- May be Used from Inventory
+-- Added to Inventory on Touch</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>250</x>
+      <y>500</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>OneShotItem
+--
+
+--
++ touch(entity: Entity)
++ use(entity: Entity)
+--
+Responsibilities
+-- Destroyed and Used on Touch
+-- Never be in Inventory</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>640</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>710</y>
+      <w>140</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>halign=left
+Subclasses
+Explained
+Elsewhere.
+See
+TakeableItem.uxf
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
