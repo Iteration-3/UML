@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>1773</w>
+      <h>2088</h>
+    </coordinates>
+    <panel_attributes>State Machinery
+--
+bg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>36</x>
+      <y>54</y>
+      <w>189</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>StateMachine
+--
+-states:stack&lt;T&gt;
+--
++push(T): void
++swap(T): void
++pop(): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>198</x>
+      <y>45</y>
+      <w>99</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>bt=.
+T extends State</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>792</x>
+      <y>54</y>
+      <w>189</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+State
+--
+--
++onEnter(): void
++onPause(): void
++onResume(): void
++onExit(): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>1179</x>
+      <y>189</y>
+      <w>576</w>
+      <h>243</h>
+    </coordinates>
+    <panel_attributes>AvatarStates
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>18</x>
+      <y>189</y>
+      <w>513</w>
+      <h>1872</h>
+    </coordinates>
+    <panel_attributes>GameStates
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>558</x>
+      <y>189</y>
+      <w>576</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>NPCStates
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>612</x>
+      <y>261</y>
+      <w>450</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>{{abstract}}
+NPCState
+--
+--
++onEnter(): void
++onPause(): void 
++onResume(): void
++onExit(): void
++Entity.interact(Entity) //explicit interaction
++Entity.onEnterObservationArea(Entity) //implicit interaction. the npc “sees” us
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>45</x>
+      <y>252</y>
+      <w>450</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>{{abstract}}
+GameState
+--
+--
++onEnter(): void //initialize and attach a view layout object
++onPause(): void 
++onResume(): void
++onExit(): void
+#getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+#getController(): (Controller??) {{Abstract}}
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1242</x>
+      <y>252</y>
+      <w>450</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>{{abstract}}
+AvatarState
+--
+--
++onEnter(): void
++onPause(): void 
++onResume(): void
++onExit(): void
++Avatar.interact(Entity) //explicit interaction
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>414</y>
+      <w>450</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>MainMenuState
+--
+--
+#getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+#getController(): (Controller??) {{Abstract}}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>738</y>
+      <w>450</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>LoadGameMenuState
+--
+--
+#getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+#getController(): (Controller??) {{Abstract}}
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>576</y>
+      <w>450</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>CharacterSelectionState
+--
+--
+#getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+#getController(): (Controller??) {{Abstract}}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>18</x>
+      <y>369</y>
+      <w>54</w>
+      <h>1539</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;10.0;10.0;1690.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>18</x>
+      <y>468</y>
+      <w>72</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>18</x>
+      <y>612</y>
+      <w>72</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>18</x>
+      <y>738</y>
+      <w>72</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;60.0;30.0;60.0;40.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>900</y>
+      <w>450</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>SaveGameMenuState
+--
+--
+#getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+#getController(): (Controller??) {{Abstract}}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>18</x>
+      <y>936</y>
+      <w>72</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>1539</y>
+      <w>450</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>InventoryMenuState
+--
+--
++onEnter(): void //overrides normal view behavior to overlay instead
++onExit(): void //removes popup layer
+#getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+#getController(): (Controller??) {{Abstract}}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>18</x>
+      <y>1575</y>
+      <w>72</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>1377</y>
+      <w>450</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>PauseMenuState
+--
+--
++onEnter(): void //overrides normal view behavior to overlay instead
++onExit(): void //removes popup layer
+#getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+#getController(): (Controller??) {{Abstract}}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>18</x>
+      <y>1377</y>
+      <w>72</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;60.0;30.0;60.0;40.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>18</x>
+      <y>1251</y>
+      <w>72</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>1215</y>
+      <w>450</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>GamePlayState
+--
+--
+#getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+#getController(): (Controller??) {{Abstract}}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>1053</y>
+      <w>450</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>OptionsMenuState
+--
+--
+#getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+#getController(): (Controller??) {{Abstract}}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>18</x>
+      <y>1107</y>
+      <w>72</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>1845</y>
+      <w>450</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>SkillsMenuState
+--
+--
++onEnter(): void //overrides normal view behavior to overlay instead
++onExit(): void //removes popup layer
+#getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+#getController(): (Controller??) {{Abstract}}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>1683</y>
+      <w>450</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>TradeMenuState
+--
+--
++onEnter(): void //overrides normal view behavior to overlay instead
++onExit(): void //removes popup layer
+#getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+#getController(): (Controller??) {{Abstract}}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>18</x>
+      <y>1737</y>
+      <w>72</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>18</x>
+      <y>1881</y>
+      <w>72</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>54</x>
+      <y>135</y>
+      <w>756</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>820.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>837</x>
+      <y>144</y>
+      <w>27</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>972</x>
+      <y>144</y>
+      <w>315</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;330.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>216</x>
+      <y>90</y>
+      <w>594</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;640.0;10.0</additional_attributes>
+  </element>
+</diagram>
