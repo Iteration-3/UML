@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>650</x>
-      <y>200</y>
+      <x>670</x>
+      <y>210</y>
       <w>210</w>
       <h>220</h>
     </coordinates>
@@ -29,8 +29,8 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>740</x>
-      <y>410</y>
+      <x>760</x>
+      <y>420</y>
       <w>30</w>
       <h>50</h>
     </coordinates>
@@ -40,8 +40,8 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>560</x>
-      <y>430</y>
+      <x>580</x>
+      <y>440</y>
       <w>210</w>
       <h>90</h>
     </coordinates>
@@ -51,8 +51,8 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>740</x>
-      <y>430</y>
+      <x>760</x>
+      <y>440</y>
       <w>230</w>
       <h>90</h>
     </coordinates>
@@ -62,8 +62,8 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>850</x>
-      <y>500</y>
+      <x>870</x>
+      <y>510</y>
       <w>210</w>
       <h>140</h>
     </coordinates>
@@ -82,8 +82,8 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>460</x>
-      <y>500</y>
+      <x>480</x>
+      <y>510</y>
       <w>210</w>
       <h>150</h>
     </coordinates>
@@ -103,8 +103,8 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>940</x>
-      <y>420</y>
+      <x>960</x>
+      <y>430</y>
       <w>390</w>
       <h>100</h>
     </coordinates>
@@ -114,12 +114,12 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1200</x>
-      <y>500</y>
+      <x>1220</x>
+      <y>510</y>
       <w>210</w>
       <h>190</h>
     </coordinates>
-    <panel_attributes>InteractiveItem
+    <panel_attributes>Door
 --
 -requiredItem: TakeableItem
 --
@@ -137,8 +137,8 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>130</x>
-      <y>500</y>
+      <x>150</x>
+      <y>510</y>
       <w>210</w>
       <h>150</h>
     </coordinates>
@@ -158,8 +158,8 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>230</x>
-      <y>430</y>
+      <x>250</x>
+      <y>440</y>
       <w>360</w>
       <h>90</h>
     </coordinates>
