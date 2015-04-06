@@ -25,12 +25,10 @@ bg=orange</panel_attributes>
     <panel_attributes>
 EntityManager
 --
-
---
-
 -partyNpcs: List&lt;NPC&gt;
 -nonPartyNpcs: List&lt;NPC&gt;
 -avatar: Avatar
+--
 +update(): void //calls update on all entities
 +addPartyNpc(npc: NPC)
 +removePartyNPC(npc: NPC)
@@ -49,12 +47,11 @@ EntityManager
     <panel_attributes>{{abstract}}
 Entity
 --
-
---
--isFlying()
 -name: Name;
 -stats: Stats
+--
 -move(Direction);
+-isFlying()
 -addItem(item: takeableItem): void
 +removeItem(item: takeableItem): void
 +equipItem(item: Item): void
@@ -75,11 +72,9 @@ Entity
     <panel_attributes>
 NPC
 --
-
---
 -behavior: Behavior
 -attackAbility: Ability
-</panel_attributes>
+--</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -93,9 +88,8 @@ NPC
     <panel_attributes>
 PET
 --
-
---
--behavior: Behavior</panel_attributes>
+-behavior: Behavior
+--</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -109,14 +103,13 @@ PET
     <panel_attributes>{{abstract}}
 Avatar
 --
-
---
--isFlying()
 -name: Name;
 -stats: Stats
--move(Direction);
 -SkillManager: Skills
 -abilities: List&lt;Ability&gt;
+--
+-isFlying()
+-move(Direction);
 -addItem(item: takeableItem): void	
 +removeItem(item: takeableItem): void
 +equipItem(item: Item): void
@@ -139,11 +132,10 @@ Avatar
     <panel_attributes>
 Mount
 --
-
---
 -behavior: Behavior
 -attackAbility: Ability
 -rider: Avatar
+--
 -setRider(Avatar) //Mount contains rider,
 and rider is set by the mount in the 
 interaction dialog. 
@@ -195,7 +187,7 @@ Summoner
       <x>1010</x>
       <y>680</y>
       <w>380</w>
-      <h>180</h>
+      <h>200</h>
     </coordinates>
     <panel_attributes>
 Sneak
