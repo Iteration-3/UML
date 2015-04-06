@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
-      <y>40</y>
+      <x>40</x>
+      <y>80</y>
       <w>270</w>
       <h>130</h>
     </coordinates>
@@ -20,8 +20,8 @@ perform()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>620</x>
-      <y>50</y>
+      <x>630</x>
+      <y>90</y>
       <w>200</w>
       <h>110</h>
     </coordinates>
@@ -33,96 +33,120 @@ perform()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>290</x>
-      <y>290</y>
-      <w>100</w>
-      <h>30</h>
+      <x>340</x>
+      <y>230</y>
+      <w>290</w>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>Aggressive</panel_attributes>
+    <panel_attributes>Aggressive
+--
+--
+# responsible for the Entity to Attack you</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>470</x>
-      <y>290</y>
-      <w>100</w>
-      <h>30</h>
+      <x>520</x>
+      <y>440</y>
+      <w>370</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Coward</panel_attributes>
+    <panel_attributes>Coward
+--
+--
+#The Entity will run away from the trigging Entity</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>610</x>
-      <y>290</y>
-      <w>100</w>
-      <h>30</h>
+      <y>550</y>
+      <w>310</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Gandhism</panel_attributes>
+    <panel_attributes>Gandhism
+--
+--
+# Talks when attacked and does nothing else</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>760</x>
-      <y>290</y>
-      <w>100</w>
-      <h>30</h>
+      <x>670</x>
+      <y>650</y>
+      <w>280</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Mount</panel_attributes>
+    <panel_attributes>Mount
+--
+--
+# allows you to mount it</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>420</x>
-      <y>560</y>
-      <w>100</w>
-      <h>30</h>
+      <x>600</x>
+      <y>350</y>
+      <w>300</w>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>Barter</panel_attributes>
+    <panel_attributes>Barter
+--
+--
+# the Entity will engage in buying and selling</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>880</x>
-      <y>290</y>
-      <w>100</w>
-      <h>30</h>
+      <x>690</x>
+      <y>730</y>
+      <w>240</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Patrol</panel_attributes>
+    <panel_attributes>Patrol
+--
+--
+# the Entity will walk around</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>380</y>
-      <w>100</w>
-      <h>30</h>
+      <x>200</x>
+      <y>350</y>
+      <w>280</w>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>Pursue</panel_attributes>
+    <panel_attributes>Pursue
+--
+--
+# this will track the Enity and Pursue them</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>290</x>
-      <y>560</y>
-      <w>100</w>
-      <h>30</h>
+      <x>270</x>
+      <y>530</y>
+      <w>170</w>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>Talk</panel_attributes>
+    <panel_attributes>Talk
+--
+--
+# the entity will interact</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
-      <y>410</y>
+      <x>160</x>
+      <y>460</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -132,23 +156,43 @@ perform()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>90</x>
-      <y>480</y>
-      <w>100</w>
-      <h>30</h>
+      <x>0</x>
+      <y>260</y>
+      <w>310</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Silence</panel_attributes>
+    <panel_attributes>Silence
+--
+--
+--
+#responsible for nulling abilities</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>140</x>
-      <y>570</y>
+      <y>520</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>Immovable</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>970</x>
+      <y>80</y>
+      <w>500</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes># Behaviors can be changed by being attacked
+# Behaviors can change when they detect something in the influence
+# Behaviors can be changed when they interact
+# Behaviors can be from cut scenes
+# spells
+</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
