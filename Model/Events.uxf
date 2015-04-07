@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="13.2">
+<diagram program="umlet" version="13.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>10</x>
-      <y>20</y>
+      <x>0</x>
+      <y>30</y>
       <w>1110</w>
       <h>420</h>
     </coordinates>
@@ -17,8 +17,8 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
-      <y>150</y>
+      <x>30</x>
+      <y>160</y>
       <w>350</w>
       <h>190</h>
     </coordinates>
@@ -36,8 +36,8 @@ EventManager
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
-      <y>170</y>
+      <x>620</x>
+      <y>180</y>
       <w>350</w>
       <h>190</h>
     </coordinates>
@@ -59,8 +59,8 @@ Event
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>380</x>
-      <y>220</y>
+      <x>370</x>
+      <y>230</y>
       <w>270</w>
       <h>30</h>
     </coordinates>
