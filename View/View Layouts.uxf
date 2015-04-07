@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>90</x>
+      <y>20</y>
+      <w>1680</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>View Layouts
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>80</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>
+CharacterSelectionLayout
+--
+-TextLabel
+-MenuButton
+-CharacterButton
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>80</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>
+MainMenuLayout
+--
+-TextLabel
+-MenuButton
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>580</x>
+      <y>80</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>
+LoadMenuLayout
+--
+-TextLabel
+-MenuButton
+-SaveSlotButton
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>80</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>
+InventoryMenuLayout
+--
+-MenuButton
+-StatsView
+-InventoryView
+-EquipmentView
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1050</x>
+      <y>80</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>
+SkillsMenuLayout
+--
+-MenuButton
+-SkillBarView
+-PlusButton
+-TextLabel
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1290</x>
+      <y>80</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>
+SaveMenuLayout
+--
+-TextLabel
+-MenuButton
+-SaveSlotButton
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1530</x>
+      <y>80</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>
+GameplayLayout
+--
+-GameMapView
+-LightMapView
+-EntityView
+-HUDView
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
