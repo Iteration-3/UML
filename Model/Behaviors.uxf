@@ -4,79 +4,99 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
-      <y>80</y>
-      <w>270</w>
-      <h>130</h>
+      <x>630</x>
+      <y>0</y>
+      <w>210</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>{{abstract}}
 Behavior
 --
-interact()
-influenceRadius()
-perform()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>630</x>
-      <y>90</y>
-      <w>200</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>BehaviorState
+Entity:entity
 --
-</panel_attributes>
++interact(Entity)
++influenceRadius()
++perform()
++onDamage()
++onEnter()
++onExit()
++getEntity()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>340</x>
-      <y>230</y>
-      <w>290</w>
-      <h>80</h>
+      <x>1800</x>
+      <y>100</y>
+      <w>190</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>PerformBehaviorState
+--
+- Entity: entity
+--
++perform()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1980</x>
+      <y>360</y>
+      <w>180</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>Aggressive
 --
+
 --
-# responsible for the Entity to Attack you</panel_attributes>
+# responsible for the 
+# Entity to Attack you</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>440</y>
-      <w>370</w>
-      <h>60</h>
+      <x>1730</x>
+      <y>380</y>
+      <w>230</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>Coward
 --
 --
-#The Entity will run away from the trigging Entity</panel_attributes>
+#The Entity will run 
+# away from the trigging Entity</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>610</x>
-      <y>550</y>
-      <w>310</w>
-      <h>60</h>
+      <x>780</x>
+      <y>290</y>
+      <w>190</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>Gandhism
 --
+- talking: Talk
 --
-# Talks when attacked and does nothing else</panel_attributes>
++interact(Entity)
++influenceRadius()
++perform()
++onDamage()
++onEnter()
++onExit()
+--
+# Talks when attacked 
+# and does nothing else</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>670</x>
-      <y>650</y>
+      <x>2210</x>
+      <y>310</y>
       <w>280</w>
       <h>60</h>
     </coordinates>
@@ -89,50 +109,62 @@ perform()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
-      <y>350</y>
-      <w>300</w>
-      <h>80</h>
+      <x>2550</x>
+      <y>240</y>
+      <w>210</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>Barter
 --
 --
-# the Entity will engage in buying and selling</panel_attributes>
+# the Entity will 
+# engage in buying and selling</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>690</x>
-      <y>730</y>
-      <w>240</w>
-      <h>60</h>
+      <x>1980</x>
+      <y>240</y>
+      <w>190</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>Patrol
 --
 --
-# the Entity will walk around</panel_attributes>
+# the Entity will 
+# walk around</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>200</x>
-      <y>350</y>
-      <w>280</w>
-      <h>70</h>
+      <x>560</x>
+      <y>290</y>
+      <w>190</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>Pursue
 --
+- sighiting: SightTracking
+-entity: Entity
 --
-# this will track the Enity and Pursue them</panel_attributes>
++interact(Entity)
++influenceRadius()
++perform()
++onDamage()
++onEnter()
++onExit()
+--
+# this will track the Enity 
+# and Pursue them</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>270</x>
-      <y>530</y>
+      <x>2280</x>
+      <y>400</y>
       <w>170</w>
       <h>70</h>
     </coordinates>
@@ -145,8 +177,8 @@ perform()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>160</x>
-      <y>460</y>
+      <x>1440</x>
+      <y>550</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -156,23 +188,24 @@ perform()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>260</y>
-      <w>310</w>
-      <h>60</h>
+      <x>1660</x>
+      <y>220</y>
+      <w>180</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>Silence
 --
 --
 --
-#responsible for nulling abilities</panel_attributes>
+#responsible for nulling 
+# abilities</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>140</x>
-      <y>520</y>
+      <x>1440</x>
+      <y>600</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -182,8 +215,8 @@ perform()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>970</x>
-      <y>80</y>
+      <x>1740</x>
+      <y>530</y>
       <w>500</w>
       <h>130</h>
     </coordinates>
@@ -193,6 +226,194 @@ perform()</panel_attributes>
 # Behaviors can be from cut scenes
 # spells
 </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>220</y>
+      <w>310</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>StateMachine
+--
+-OBehave: Stack&lt;Behavior&gt;
+--
++push(Behavior):
++pop():Behavior  // post: contains &gt;0
++perform()
++interact()
++onDamage()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1350</x>
+      <y>400</y>
+      <w>240</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>NoticeDeath
+--
+--
+# gets Notified when someone
+# dies in Influence Radius</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1210</x>
+      <y>110</y>
+      <w>280</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>BehaviiorInfluence
+--
+- influenceEvent: BehaviorInfluenceEvent
+- entity: Entity
+- radius: int
+- Trigger
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1330</x>
+      <y>240</y>
+      <w>30</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1100</x>
+      <y>400</y>
+      <w>240</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>SightTracking
+--
+- entity: Entity
+- radius: int
+- 
+--
+- influenceBehavior()
+--
+# this will find the Avatar</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1440</x>
+      <y>360</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1210</x>
+      <y>360</y>
+      <w>260</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1210</x>
+      <y>360</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2390</x>
+      <y>100</y>
+      <w>190</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>InteractBehaviorState
+--
+- Entity: entity
+--
++perform()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>830</x>
+      <y>30</y>
+      <w>1670</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;1650.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1890</x>
+      <y>30</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2470</x>
+      <y>30</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1410</x>
+      <y>30</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2030</x>
+      <y>720</y>
+      <w>500</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>So you know how I said we have a Composite,  well forget that,  
+We have a Behavior that is comprised of states,  
+1. interact  and multiple behavior stats   
+these states comprise a Behavior</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
