@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="13.2">
+<diagram program="umlet" version="13.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>60</x>
-      <y>30</y>
+      <x>10</x>
+      <y>90</y>
       <w>1670</w>
       <h>1230</h>
     </coordinates>
@@ -17,8 +17,8 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>90</x>
-      <y>60</y>
+      <x>40</x>
+      <y>120</y>
       <w>280</w>
       <h>110</h>
     </coordinates>
@@ -35,8 +35,8 @@ GameMap
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1030</x>
-      <y>60</y>
+      <x>980</x>
+      <y>120</y>
       <w>480</w>
       <h>110</h>
     </coordinates>
@@ -53,8 +53,8 @@ ItemMap
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>90</x>
-      <y>240</y>
+      <x>40</x>
+      <y>300</y>
       <w>280</w>
       <h>110</h>
     </coordinates>
@@ -71,8 +71,8 @@ Tile
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>700</x>
-      <y>410</y>
+      <x>650</x>
+      <y>470</y>
       <w>280</w>
       <h>110</h>
     </coordinates>
@@ -88,8 +88,8 @@ AirPassableTile
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>390</x>
-      <y>410</y>
+      <x>340</x>
+      <y>470</y>
       <w>280</w>
       <h>110</h>
     </coordinates>
@@ -105,8 +105,8 @@ ImpassableTile
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>90</x>
-      <y>410</y>
+      <x>40</x>
+      <y>470</y>
       <w>280</w>
       <h>110</h>
     </coordinates>
@@ -122,8 +122,8 @@ PassableTile
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
-      <y>340</y>
+      <x>70</x>
+      <y>400</y>
       <w>70</w>
       <h>90</h>
     </coordinates>
@@ -133,8 +133,8 @@ PassableTile
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>320</x>
-      <y>340</y>
+      <x>270</x>
+      <y>400</y>
       <w>100</w>
       <h>90</h>
     </coordinates>
@@ -144,8 +144,8 @@ PassableTile
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
-      <y>340</y>
+      <x>310</x>
+      <y>400</y>
       <w>360</w>
       <h>90</h>
     </coordinates>
@@ -155,8 +155,8 @@ PassableTile
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>160</x>
-      <y>160</y>
+      <x>110</x>
+      <y>220</y>
       <w>30</w>
       <h>100</h>
     </coordinates>
@@ -166,8 +166,8 @@ PassableTile
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1490</x>
-      <y>50</y>
+      <x>1440</x>
+      <y>110</y>
       <w>360</w>
       <h>50</h>
     </coordinates>

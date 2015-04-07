@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="13.1">
+<diagram program="umlet" version="13.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>670</x>
-      <y>210</y>
+      <x>520</x>
+      <y>130</y>
       <w>210</w>
       <h>220</h>
     </coordinates>
@@ -29,8 +29,8 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>760</x>
-      <y>420</y>
+      <x>610</x>
+      <y>340</y>
       <w>30</w>
       <h>50</h>
     </coordinates>
@@ -40,8 +40,8 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>440</y>
+      <x>430</x>
+      <y>360</y>
       <w>210</w>
       <h>90</h>
     </coordinates>
@@ -51,8 +51,8 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>760</x>
-      <y>440</y>
+      <x>610</x>
+      <y>360</y>
       <w>230</w>
       <h>90</h>
     </coordinates>
@@ -62,8 +62,8 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>870</x>
-      <y>510</y>
+      <x>720</x>
+      <y>430</y>
       <w>210</w>
       <h>140</h>
     </coordinates>
@@ -82,8 +82,8 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>480</x>
-      <y>510</y>
+      <x>330</x>
+      <y>430</y>
       <w>210</w>
       <h>150</h>
     </coordinates>
@@ -103,8 +103,8 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>430</y>
+      <x>810</x>
+      <y>350</y>
       <w>390</w>
       <h>100</h>
     </coordinates>
@@ -114,8 +114,8 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1220</x>
-      <y>510</y>
+      <x>1070</x>
+      <y>430</y>
       <w>210</w>
       <h>190</h>
     </coordinates>
@@ -137,8 +137,8 @@ Responsibilities
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>510</y>
+      <x>0</x>
+      <y>430</y>
       <w>210</w>
       <h>150</h>
     </coordinates>
@@ -158,8 +158,8 @@ Responsibilities
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>250</x>
-      <y>440</y>
+      <x>100</x>
+      <y>360</y>
       <w>360</w>
       <h>90</h>
     </coordinates>
