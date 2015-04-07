@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="13.0">
+<diagram program="umlet" version="13.2">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>0</x>
-      <y>30</y>
+      <x>80</x>
+      <y>0</y>
       <w>1110</w>
-      <h>420</h>
+      <h>810</h>
     </coordinates>
     <panel_attributes>Events
 --
@@ -17,8 +17,8 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
-      <y>160</y>
+      <x>110</x>
+      <y>130</y>
       <w>350</w>
       <h>190</h>
     </coordinates>
@@ -36,15 +36,14 @@ EventManager
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>620</x>
-      <y>180</y>
+      <x>700</x>
+      <y>150</y>
       <w>350</w>
-      <h>190</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes>{{abstract}}
 Event
 --
--target: Entity
 -duration: long (ms)
 --
 +Event(double duration)
@@ -52,19 +51,198 @@ Event
 +onExpire(): void //called by the event manager
 +hasExpired(): boolean
 +perform(): void
-+setTarget(Entity): void
+
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>370</x>
-      <y>230</y>
+      <x>450</x>
+      <y>200</y>
       <w>270</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;250.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>450</y>
+      <w>170</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>{{abstract}}
+UnSourcedEvent
+--
+-target: Entity
+--
++onBegin(): void  
++onExpire(): void
++hasExpired(): boolean
++perform(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>590</x>
+      <y>660</y>
+      <w>170</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>StatisticModifierEvent
+--
+-statistics: EntityStatistics
+--
++onBegin(): void  
++onExpire(): void
++hasExpired(): boolean
++perform(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>790</x>
+      <y>660</y>
+      <w>170</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>BehaviorModifierEvent
+--
+-behavior: Behavior
+--
++onBegin(): void  
++onExpire(): void
++hasExpired(): boolean
++perform(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>660</y>
+      <w>170</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>SkillModifierEvent
+--
+--
++onBegin(): void  
++onExpire(): void
++hasExpired(): boolean
++perform(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>660</y>
+      <w>170</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>PrintEvent
+--
+-printDesintation: View?
+--
++onBegin(): void  
++onExpire(): void
++hasExpired(): boolean
++perform(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1010</x>
+      <y>450</y>
+      <w>170</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>SourcedEvent
+--
+-target: Entity
+-destination: Entity
+--
++onBegin(): void  
++onExpire(): void
++hasExpired(): boolean
++perform(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>300</y>
+      <w>30</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>410</y>
+      <w>430</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;20.0;410.0;20.0;410.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>580</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>620</y>
+      <w>430</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;20.0;410.0;20.0;410.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>630</y>
+      <w>230</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0;210.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>670</x>
+      <y>630</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
