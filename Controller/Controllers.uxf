@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>200</y>
+      <w>210</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>MainMenuController
+--
+-mainMenuLayout
+--
+setLayout(JPanel)
++newGame()
++loadGame()
++exitGame()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>200</y>
+      <w>260</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>CharacterSelectionMenuController
+--
+-characterSelectionLayout
+--
+setLayout(JPanel)
++selectSmasher()
++selectSummoner()
++selectSneak()
++goBack()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>530</x>
+      <y>200</y>
+      <w>180</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>LoadMenuController
+--
+-loadMenuLayout
+--
+setLayout(JPanel)
++selectSlot(int)
++loadGame()
++goBack()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>730</x>
+      <y>200</y>
+      <w>180</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>SaveMenuController
+--
+-saveMenuLayout
+--
+setLayout(JPanel)
++selectSlot(int)
++saveGame()
++goBack()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>930</x>
+      <y>200</y>
+      <w>180</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>GameplayController
+--
+-gameplayLayout
+--
+setLayout(JPanel)
+doAllThings()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1120</x>
+      <y>200</y>
+      <w>180</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>SkillsMenuController
+--
+-skillMenuLayout
+--
+setLayout(JPanel)
+incrementSkill(int)
+goBack()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1330</x>
+      <y>200</y>
+      <w>180</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>InventoryMenuController
+--
+-inventoryMenuLayout
+--
+setLayout(JPanel)
+selectItem(int)
+goBack()</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
