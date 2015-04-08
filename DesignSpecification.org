@@ -2780,7 +2780,7 @@ Daniel
 
 
 \newpage
-* Subsystem View Layouts
+** Subsystem View Layouts
 *** Overview
 Layouts are the top level containers associated with a particular menu / GameState.  Layouts extend JPanel, and thus can display different views.  Some Layouts (such as Layouts with menus), can be decorated with JComponents (or ViewComponents).  Menu Layouts use the Mouse to advance to the next State and Layout.  
 \newpage
@@ -3388,7 +3388,8 @@ Represents the view of the avatars Stats.
 *** SubSystem Overview
 
 
-Controllers are to represent the ‘C’ in the MVC Pattern.  They are to listen and interpret input, and send it along to the Model.  Each State in the game has an associated Controller.  
+
+        Controllers are to represent the ‘C’ in the MVC Pattern.  They are to listen and interpret input, and send it along to the Model.  Each State in the game has an associated Controller to set the action listeners and commands that the user will call on to change the state of the model.  The controller allows is the only form of mediary for the User to communicate with the model.  
 
 
 \newpage
