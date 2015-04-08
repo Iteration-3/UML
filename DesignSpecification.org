@@ -2773,8 +2773,8 @@ Daniel
 
 \newpage
 
-*Subsystem Views
-***Overview
+* Subsystem Views
+*** Overview
     the Views comprise of the visual representation of the model.  If the view was taken out and replaced with another it would work just fine, as long as it adhears to the models update methods to cahnge the view.  The View is connected with Controllers that allow the user tho interact with the Views and pass messages to the model to change the state of the game.
 
 
