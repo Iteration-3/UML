@@ -7,6 +7,7 @@
 
 
 * Subsystem Model
+        The model is comprised of the grunt work of the program.  Everything that happens in the game goes to or through the model.  The Controllers for the game are set up so that they communicate to the model to do requests from the actions of the user. The model then sends an update to the view to change its state, because the model has changed.  The model is well defined and incorporates all the bits and logic of the game.  If the Controllers and view did not exist, each subsystem of the game would work, provided that the controller and views where checked for null within the model itself.
 
 
 
@@ -15,9 +16,7 @@
 
 ** Model
 ***  Overview
-        The model is comprised of the grunt work of the program.  Everything that happens in the game goes to or through the model.  The Controllers for the game are set up so that they communicate to the model to do requests from the actions of the user. The model then sends an update to the view to change its state, because the model has changed.  The model is well defined and incorporates all the bits and logic of the game.  If the Controllers and view did not exist, each subsystem of the game would work, provided that the controller and views where checked for null within the model itself.
-
-The model provides an interface for the view and controller to interact with. It properly encapsulates every aspect of the model without revealing too much about the internals of  implementation.
+        The model provides an interface for the view and controller to interact with. It properly encapsulates every aspect of the model without revealing too much about the internals of  implementation.
 *** Responsibilities
 1. Encapsulates all the data in the model
 2. Holds all the managers
