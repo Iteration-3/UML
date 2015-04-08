@@ -1,4 +1,4 @@
-﻿#+AUTHOR: Group [Name TBD]
+﻿#+AUTHOR: Group 
 
 
 #+OPTIONS: toc:2  
