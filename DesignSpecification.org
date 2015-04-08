@@ -2660,18 +2660,18 @@ extends GameState
 \newpage
 
 
-** SubSubSystem Loading / Saving
-**** Overview
+* SubSystem Loading / Saving
+*** Overview
 This system covers utility classes for loading and saving the state of the game. We use a JSON parser to produce a helper object of type StructuredMap. The StructuredMap’s role is to provided typed access to saved data from the JSON.
 \newpage
-*** StructuredMap
-**** Overview
+** StructuredMap
+*** Overview
 StructuredMaps are simply hashmaps of String to a structured map type that provide typed access to the different objects they hold.
-**** Responsibilities
+*** Responsibilities
          1. Act as a DAO.
-**** Collaborators
+*** Collaborators
 None.
-**** UML class diagram
+*** UML class diagram
 + put(): void
 + getString(key : String): String
 + getDouble(key : String): Double
@@ -2682,73 +2682,73 @@ None.
 + getIntArray(key : String): int[]
 + getDoubleArray(key : String): double[]
 + getKeys(): Set<String>
-**** Implementor
+*** Implementor
 Daniel
-**** Tester
+*** Tester
 Daniel
 \newpage
-*** JSONParser
-**** Overview
+** JSONParser
+*** Overview
 This is a utility class that parses JSON. It converts a JSONToken stream into a StructuredMap.
-**** Responsibilities
+*** Responsibilities
          1. Parse JSON and return a StructuredMap
-**** Collaborators
+*** Collaborators
          1. JSONScanner
          2. JSONToken
-**** UML class diagram
+*** UML class diagram
 + getStructuredMapFromJSON(String : json): StructuredMap
-**** Implementor
+*** Implementor
 Daniel
-**** Tester
+*** Tester
 Daniel
 \newpage
-*** JSONScanner
-**** Overview
+** JSONScanner
+*** Overview
 This class simply tokenizes JSON.
-**** Responsibilities
+*** Responsibilities
          1. Tokenize JSON.
-**** Collaborators
+*** Collaborators
          1. JSONScanner
          2. JSONToken
-**** UML class diagram
+*** UML class diagram
 + getTokens(String : json): Queue<JSONToken>
-**** Implementor
+*** Implementor
 Daniel
-**** Tester
+*** Tester
 Daniel
 \newpage
-*** JSONToken
-**** Overview
+** JSONToken
+*** Overview
 This is an enum of all valid JSON tokens.
-**** Responsibilities
+*** Responsibilities
          1. Represent JSON tokens.
-**** Collaborators
+*** Collaborators
 None.
-**** UML class diagram
+*** UML class diagram
 [  LBRACE, RBRACE, LBRACKET, RBRACKET, COLON, COMMA, TRUE, FALSE, NULL, STRING, DOUBLE, INTEGER ]
-**** Implementor
+*** Implementor
 Daniel
-**** Tester
+*** Tester
 Daniel
 \newpage
-*** JSONFormatter
-**** Overview
+** JSONFormatter
+*** Overview
 This class formats a StructuredMap into a String. Produces proper, tabbed, printable, JSON.
-**** Responsibilities
+*** Responsibilities
          1. Convert a StructuredMap into a String.
-**** Collaborators
+*** Collaborators
 None.
-**** UML class diagram
+*** UML class diagram
          - getStringRepresentation(StructuredMap): String
-**** Implementor
+*** Implementor
 Daniel
-**** Tester
+*** Tester
 Daniel
 \newpage
 
 
-** SubSubSystem Dialog
-**** Overview
+* SubSystem Dialog
+*** Overview
 This is the Dialog that we can Log to the system to show on the DialogLayout.  Use this to talk to the Avatar.
 \newpage
 * Subsystem View
