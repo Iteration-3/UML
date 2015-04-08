@@ -5,7 +5,7 @@
 
 
 
-\newpage
+
 * Subsystem Model
 
 
@@ -217,7 +217,7 @@ extends NPC
 *** Tester
         Josh
 
-
+\newpage
 ** Avatar
 *** Overview
         This is a special entity, one that is controlled by the player and can mount a Mount.
@@ -753,7 +753,6 @@ This trigger will vanish from the map after a specified period of time. Before t
 *** Responsibilities
    1. Spawns events whenever entities cross the trigger radius until it expires.
 *** Collaborators
-*** Collaborators
       1. EventManager
       2. Area
       3. Entity
@@ -1049,6 +1048,7 @@ Josh
 
 
 
+\newpage
 ** BehaviorModifierEvent
 *** Overview
 A BehaviorModifierEvent is a type of Event, in which a new State/Behavior is added to the Targeted Entity.  For example, adding a ‘Frozen’ behavior to an Entity once hit with an iceball.
@@ -1077,6 +1077,7 @@ Josh
 
 
 
+\newpage
 ** SkillModifierEvent
 *** Overview
 A SkillModifierEvent modifies the Skill set of a targeted Entity.  For example, consider the Bargain skill.  Once you use Bargain skill, it will reduce the Bargain skill of the targeted Entity, thus reducing the prices of the purchased Items.
@@ -1106,6 +1107,7 @@ Josh
 
 
 
+        \newpage
 ** PrintEvent
 *** Overview
 PrintEvent prints words to a menu or console.  For example, it may print out the stats of the Entity we are observing.
@@ -1143,6 +1145,7 @@ Josh
 
 
 
+        \newpage
 ** SourcedEvent
 *** Overview
 SourcedEvent is a special Event, that affects two entities: A ‘source’ entity, and a ‘target’ entity.  Consider an example PickPocket.  You need to get Items / Money from one Entity, and place them into your Inventory / Bank.
@@ -1175,6 +1178,7 @@ Josh
 
 
 
+\newpage
 ** EventManager
 *** Overview
 The EventManager keeps track of current Events. At each game tick, it calls an Event’s perform method and checks to see if it has expired.
@@ -2212,7 +2216,7 @@ A NPC specific behavior is very complex,  as it defines the AI of a NPC.  They c
 
 
 
-        
+      \newpage  
 * Subsystem Light
 *** Overview
 The light subsystem implements and manages the fog of war. This system will have a LightMap that maintains a visibility level for every tile and is responsible for raising the visibility level of a location when a light source is present and lowering the visibility level of unseen locations. This LightMap will be managed by the LightManager which will be the class that coordinates the whole operation on every game tick.
@@ -3382,6 +3386,8 @@ Controllers are to represent the ‘C’ in the MVC Pattern.  They are to listen
 
 
 \newpage
+
+*** Diagram
 
 
 ** MainMenuController
