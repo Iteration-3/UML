@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>160</y>
+      <w>280</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>Model
+--
+- keyPreferences: KeyPreferences
+- eventManager: EventManager
+- entityManager: EntityManager
+- gameMap: GameMap
+- itemMap: ItemMap
+- projectileManager: ProjectileManager
+- triggerManager: TriggerManager
+--
++ moveUp(): void
++ moveUpLeft(): void
++ moveDownLeft(): void
++ moveDown(): void
++ moveDownRight(): void
++ moveUpRight(): void
++ save(): StructuredMap
++ load(StructuredMap): StructuredMap
++ push(GameState): void
++ pop(): void
++ swap(GameState): void
++ update(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>90</y>
+      <w>280</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+/StateMachine&lt;GameState&gt;/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>120</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+</diagram>
