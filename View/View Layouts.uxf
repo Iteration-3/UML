@@ -6,8 +6,8 @@
     <coordinates>
       <x>0</x>
       <y>10</y>
-      <w>1910</w>
-      <h>280</h>
+      <w>2160</w>
+      <h>290</h>
     </coordinates>
     <panel_attributes>View Layouts
 --
@@ -157,6 +157,21 @@ render()</panel_attributes>
 --
 render()
 setStrings(String[])</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1920</x>
+      <y>70</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>PauseMenuLayout
+--
+
+--
+</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
