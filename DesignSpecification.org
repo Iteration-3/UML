@@ -1,0 +1,3725 @@
+﻿#+AUTHOR: Group [Name TBD]
+
+#+OPTIONS: toc:2  
+
+
+
+\newpage
+* Subsystem 1: Model
+
+
+
+\newpage
+
+
+** Model
+***  Overview
+
+
+The model provides an interface for the view and controller to interact with. It properly encapsulates every aspect of the model without revealing too much about the internals of  implementation.
+*** Responsibilities
+1. Encapsulates all the data in the model
+2. Holds all the managers
+3. Provides an interface for the model and view to interact with
+*** Collaborators
+1. StructuredMap
+2. Controller
+3. View
+4. KeyController
+5. The whole model essentially
+*** UML class diagram
+{{ extends StateMachine<GameState> }}
+- keyPreferences: KeyPreferences
+- eventManager: EventManager
+- entityManager: EntityManager
+- gameMap: GameManager
+- itemMap: ItemMap
+- projectileManager: ProjectileManager
+- triggerManager: TriggerManager
+- getKeyPreferences(): void // A bunch of methods
+- move/ability functions():
+- save(): StructuredMap
+- load(structuredMap): void
+- push(T): void
+- swap(T): void
+- pop(): void
+- update(): void
+- getCurrentUnit(): Entity
+
+
+*** Implementor
+        Josh
+*** Tester
+        Josh
+\newpage
+* Subsystem 1.1: Entity
+*** Overview
+        An entity is a mobile thing, either an Avatar or an NPC or a Mount that has the ability to move itself. It keeps track of its own location on the map and the direction it is facing. An Entity has a name, EntityStatistics, set of Abilities, an Inventory, and an EquipmentManager. Entities are managed by the EntityManager.
+\newpage
+
+
+** EntityManager
+*** Overview
+An EntityManager is responsible for keeping track of all the entities currently on the map. There are three sub divisions of entities. PartyNPCs, which are the Avatar’s NPC friends. Avatar. nonPartyNPCs, which are all other NPCs.
+*** Responsibilities
+1. Tracks all entities in the game
+2. Separates the entities into different categories
+3. Calls update methods on each entity
+*** Collaborators
+1. Entities
+2. StructuredMap
+*** UML class diagram
+- partyNpcs: List<NPC>
+- nonPartyNpcs: List<NPC>
+- avatar: Avatar
+- update(): void //calls update on all entities
+- addPartyNpc(npc: NPC)
+- removePartyNPC(npc: NPC)
+- getEntityAtLocation(location: Location): Entity // returns NULL if not found
+- save(): StructuredMap
+- load(structuredMap): void
+*** Implementor
+        Josh
+*** Tester
+        Josh
+\newpage
+
+
+** Entity
+*** Overview
+An entity is a mobile actor. It will be subclassed for the player, npcs, or mounts. It keeps track of its own location on the map and the direction it is facing. An Entity has a name, EntityStatistics, set of Abilities, and an ItemManager. 
+*** Responsibilities        
+1. Equip and unequip equipment.
+2. Add and remove inventory items.
+3. Maintain its stats
+4. Hold a set of Abilities
+5. Maintain Direction that it is facing
+6. Maintain Location
+7. Responsible for moving itself around the map
+*** Collaborators
+1. Item
+2. Ability
+3. Statistics
+4. ItemManager
+5. Location
+6. Angle (Direction)
+7. EntityView
+8. StructuredMap
+*** UML class diagram
+{{Abstract}}
+- isFlying(): boolean
+- name: Name;
+- stats: Stats
+- move(Direction);
+- addItem(item: takeableItem): void
+- removeItem(item: takeableItem): void
+- equipItem(item: Item): void
+- unequipItem(item: Item): void
+- attack(): void
+      #    getDerivedStats(): EntityStatistics
+      #    getEntityView(): EntityView
+- save(): StructuredMap
+- load(structuredMap): void
+*** Implementor
+        Josh
+*** Tester
+        Josh
+\newpage
+
+
+** NPC
+*** Overview
+        This is a specific entity that maintains its own behaviors. On update, it is responsible for carrying out its behaviors.  It is not playable by the Avatar.  The Avatar may interact with an NPC by attempting to move into a Tile where an Entity is present.
+*** Responsibilities        
+1. Maintain Behavior
+*** Collaborators
+1. Item
+2. Abilities
+3. Statistics
+4. Inventory
+5. Equipment Inventory
+6. Location
+7. Angle (Direction)
+8. StructuredMap
+*** UML class diagram
+extends Entity
+- behavior: Behavior
+- attackAbility: Ability
+- save(): StructuredMap
+- load(structuredMap): void
+*** Implementor
+        Josh
+*** Tester
+        Josh
+
+
+\newpage
+
+
+** Pet
+*** Overview
+        This is an NPC that will follow you.   You can send him commands to Scout for you, and do other Behaviors.  
+*** Responsibilities        
+1. Stay near you
+2. Increase your vision 
+3. Pick up items for you
+4. Attack enemies
+*** Collaborators
+1. Avatar
+2. StructuredMap
+*** UML class diagram
+extends NPC
+- behavior: Behavior
+- save(): StructuredMap
+- load(structuredMap): void
+
+
+*** Implementor
+        Josh
+*** Tester
+        Josh
+
+
+
+
+\newpage
+
+
+** Mount
+*** Overview
+        This is an npc, which, if you so desire, can be mounted.  It can can be moved by an AI, here this Mount doesn’t have anything special about it all it does it move around when told to, but is also mountable.  The avatar may mount a ‘Mount’ by attempting to move onto a Tile where a Mount NPC is present, and then selecting the ‘Mount’ option from the popup menu.
+*** Responsibilities        
+1. Maintain Behavior
+2. Allows an Avatar to mount it
+3. Can be moved around by an AI
+4. Forwards damage & other events to its rider.
+5. Returns stats that includes it’s riders, and riders inventory. 
+*** Collaborators
+1. Item
+2. Abilities
+3. Statistics
+4. Inventory
+5. Equipment Inventory
+6. Location
+7. Angle (Direction)
+8. StructuredMap
+*** UML class diagram
+extends NPC
+- behavior: Behavior
+- attackAbility: Ability
+- rider: Avatar
+- setRider(Avatar) //Mount contains rider, and rider is set by the mount in the interaction dialog. 
+- save(): StructuredMap
+- load(structuredMap): void
+*** Implementor
+        Josh
+*** Tester
+        Josh
+
+
+** Avatar
+*** Overview
+        This is a special entity, one that is controlled by the player and can mount a Mount.
+*** Responsibilities        
+1. Mount entities
+2. Interact with NPCs
+*** Collaborators
+1. Item
+2. Abilities
+3. Statistics
+4. ItemManager
+5. Location
+6. Angle (Direction)
+7. Mount
+8. StructureMap
+*** UML class diagram
+{{Abstract}}
+Extends Entity
+- isFlying()
+- name: Name;
+- stats: Stats
+- move(Direction);
+- SkillManager: Skills
+- abilities: List<Ability>
+- controlManager: ControlManager
+- addItem(item: takeableItem): void        
+- removeItem(item: takeableItem): void
+- equipItem(item: Item): void
+- unequipItem(item: Item): void
+- getListeners():List<Listener>
+      #    getDerivedStats(): EntityStatistics
+      #    getSkillManager(): SkillManager
+
+
+      #    getEntityView(): EntityView
+- save(): StructuredMap
+- load(structuredMap): void
+*** Implementor
+        Josh
+*** Tester
+        Josh
+
+
+
+
+\newpage
+** Smasher
+*** Overview
+        An Avatar that is specialized with Smasher characteristics.
+*** Responsibilities        
+1. Contain Smasher functionality
+2. May Equip OneHandedWeapons
+3. May Equip TwoHandedWeapons
+4. May Equip BrawlingWeapons
+*** Collaborators
+1. SmasherSkillManager
+2. StructuredMap
+*** UML class diagram
+Extends Avatar
+- attack(): void
+      #    getSkillManager(): SmasherSkillManager
+      #    getEntityView(): SmasherView
+- save(): StructuredMap
+- load(structuredMap): void
+
+
+*** Implementor
+        Josh
+*** Tester
+        Josh
+
+\newpage
+** Summoner
+*** Overview
+        An Avatar that is specialized with Summoner characteristics.
+*** Responsibilities        
+1. Contain Summoner functionality
+2. May Cast spells
+3. May Equip Staff Weapons
+*** Collaborators
+1. SummonerSkillManager
+2. StructuredMap
+*** UML class diagram
+Extends Avatar
+- attack(): void //Handles staff skill
+- bane(): void
+- boon(): void
+- enchantment():void
+      #    getSkillManager(): SummonerSkillManager
+      #    getEntityView(): SummonerView
+- save(): StructuredMap
+- load(structuredMap): void
+
+
+*** Implementor
+        Josh
+*** Tester
+        Josh
+\newpage
+** Sneak
+*** Overview
+        An Avatar that is specialized with Sneak characteristics.
+*** Responsibilities        
+1. Contain Sneak functionality
+2. May Equip RangedWeapons
+*** Collaborators
+1. SneakSkillManager
+2. StructuredMap
+*** UML class diagram
+
+
+Extends Avatar
+- save(): StructuredMap
+- load(structuredMap): void
+
+
+*** Implementor
+        Josh
+*** Tester
+        Josh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+* Subsystem 1.1: Abilities and Skills
+*** Overview
+        An ability is an abstract class with a perform method. When called, it does something, such as making a fireball, or raising stats, etc. 
+EX) Fireball Ability might create a fireball with damage based on the bane skill. 
+NPC on the other hand, would just have a fireball of a fixed power. 
+
+
+
+
+SkillManagers have the set of skills that an avatar has.
+
+
+
+
+
+
+\newpage
+
+
+** Ability
+*** Overview
+        
+*** Responsibilities        
+1. Carry out it’s respective ability
+*** Collaborators
+1. SkillManager
+*** UML class diagram
+{{abstract}}
+- perform() : void
+\newpage
+** SkillManager
+*** Overview
+        Has the set of abilities. Subclassed for each avatar type.
+As when they are made, an avatar knows what subclass it is, it knows what skillManager to get, and thus, can then also get the correct abilities. 
+*** Responsibilities        
+*** Collaborators
+   1. StructuredMap
+*** UML class diagram
+{{abstract}}
+   - getBarterSkill():int
+   - getObserveSkill():int
+   - getBindWoundsSkill():int
+   - getAttackSkill():int
+   - save(): StructuredMap
+   - load(structuredMap): void
+
+
+*** Implementor
+        Josh
+*** Tester
+        Josh
+
+
+\newpage
+** SmasherSkillManager
+*** Overview
+        Has the set of abilities. Subclassed for each avatar type.
+*** Responsibilities        
+*** Collaborators
+   1. StructuredMap
+*** UML class diagram
+extends SkillManager
+   - getTwoHandedSkill():int
+   - getSingleHandedSkill():int
+   - get0BrawlingSkill():int
+   - save(): StructuredMap
+   - load(structuredMap): void
+
+
+*** Implementor
+        Josh
+*** Tester
+        Josh
+
+
+\newpage
+** SneakSkillManager
+*** Overview
+        Has the set of abilities. Subclassed for each avatar type.
+*** Responsibilities        
+*** Collaborators
+   1. StructuredMap
+*** UML class diagram
+extends SkillManager
+   - getCreepSkill():int
+   - getPickPocketSkill():int
+   - getTrapRemoveSkill():int
+   - getRangedWeaponSkill():int
+   - save(): StructuredMap
+   - load(structuredMap): void
+
+
+*** Implementor
+        Josh
+*** Tester
+        Josh
+\newpage
+** SummonerSkillManager
+*** Overview
+        Has the set of abilities. Subclassed for each avatar type.
+*** Responsibilities        
+*** Collaborators
+   1. StructuredMap
+*** UML class diagram
+extends SkillManager
+   - getBoonSkill():int
+   - getBaneSkill():int
+   - getEnchantSkill():int
+   - getStaffSkill():int
+   - save(): StructuredMap
+   - load(structuredMap): void
+
+
+*** Implementor
+        Josh
+*** Tester
+        Josh
+\newpage
+* Subsystem 1.2: Map
+*** Overview
+        This system concerns itself with a collection of tiles, which are the physical terrain.
+\newpage
+
+
+
+
+** GameMap
+*** Overview
+The collection of physical tiles that make up a map.  A map also manages whether or not an Entity may successfully move to a location.  
+*** Responsibilities
+   1. Hold the set of tiles that defines the area’s terrain.
+*** Collaborators
+   1. Tile
+   2. Entity
+   3. StructuredMap
+*** UML class diagram        
+   - tiles: Tile[][]
+   - canPass(entity, Location): boolean
+   - touch(entity, Location): void
+   - save(): StructuredMap
+   - load(structuredMap): void
+*** Implementor
+        Matt
+*** Tester
+Matt
+\newpage
+
+
+** ItemMap
+*** Overview
+The collection of items that exist on a map, these items do not know their own location, and can be touched to trigger action upon them. 
+*** Responsibilities
+   1. Maintain all the items on the map based on tile location
+*** Collaborators
+   1. Item
+   2. StructuredMap
+*** UML class diagram        
+   - items: Collection<Location, Item>
+   - add(item, location)
+   - touch(entity, location): void // adds item if it can and removes it from map 
+   - save(): StructuredMap
+   - load(structuredMap): void
+*** Implementor
+Matt
+*** Tester
+        Matt
+\newpage
+
+
+** Tile
+*** Overview
+A tile represents a single hexagonal tile on the map. It is an abstract class that specific tiles extend from. This class is here to determine what entities can pass through a specific tile. Will be associated with a particular view (e.g. a tile that looks like grass, or a lava, or etc.). A tile also holds an inventory of items.
+*** Responsibilities
+   1. Define whether or not an entity can stand on the location the tile represents.
+   2. Maintain a set of items in an Inventory.
+   3. Pass touch events to each item when an Entity touches a tile.
+*** Collaborators
+   1. TileRenderer
+   2. Entity
+   3. Inventory
+   4. Item
+   5. TileView
+   6. StructuredMap
+*** UML class diagram
+ {{ Abstract }}
+   - tileView: TileView
+   - isPassable(Entity): boolean
+   - touch(Entity): void
+   - save(): StructuredMap
+   - load(structuredMap): void
+*** Implementor
+Matt
+*** Tester
+        Matt
+** PassableTile
+*** Overview
+This tile exists as a tile that all entities can move through. (Flying or not Flying)
+*** Responsibilities
+   1. Permit movement.
+*** Collaborators
+   1. TileRenderer
+   2. Entity
+   3. Inventory
+   4. Item
+   5. StucturedMap
+*** UML class diagram
+PassableTile extends Tile
+
+
+   - isPassable(Entity): boolean
+   - touch(Entity): void
+   - save(): StructuredMap
+   - load(structuredMap): void
+*** Implementor
+Matt
+*** Tester
+Matt
+\newpage
+** ImpassableTile
+*** Overview
+This tile specializes Tile to restrict movement of any entity. 
+*** Responsibilities
+   1. Blocks entities from moving through the tile.
+*** Collaborators
+   1. TileRenderer
+   2. Entity
+   3. Inventory
+   4. Item
+   5. StructuredMap
+*** UML class diagram
+ImpassableTile extends Tile
+
+
+   - isPassable(Entity): boolean
+   - touch(Entity): void
+   - save(): StructuredMap
+   - load(structuredMap): void
+*** Implementor
+Matt
+*** Tester
+Matt
+
+
+
+
+\newpage
+
+
+** AirPassableTile
+*** Overview
+This tile specializes Tile to restrict movement of an entity that does not have flying capabilities.
+*** Responsibilities
+   1. Blocks entities without the capability to fly from moving through the tile.
+*** Collaborators
+   1. TileRenderer
+   2. Entity
+   3. Inventory
+   4. Item
+   5. StructuredMap
+*** UML class diagram
+AirPassableTile extends Tile
+   - isPassable(Entity): boolean
+   - touch(Entity): void
+   - save(): StructuredMap
+   * load(structuredMap): void
+*** Implementor
+Matt
+*** Tester
+Matt
+\newpage
+* Subsystem 1.3: Triggers
+*** Overview
+The trigger system is the primary way that events are applied to entities.They come into action whenever a geometric area of influence is entered. Once this occurs, an event is spawned and pushed to the EventManager which carries out the actual actions.  A TriggerManager checks every ‘tick’ of the game to see if there is an Entity who has entered a Trigger’s Geometry.  If it has, then the Trigger in question spawns an event, targeted at that Entity, and forwards that to the EventManager.
+
+
+
+
+\newpage
+
+
+** TriggerManager
+*** Overview
+This is responsible for checking and tracking all existing triggers. At every game tick, it loops through through all applicable entities and passes them to each trigger. 
+*** Responsibilities
+   1. Tracks active triggers.
+   2. Sends all appropriate entities to triggers’ handle method.
+   3. Distinguishes between non-party triggers and party-applicable triggers.
+*** Collaborators
+   1. Triggers
+   2. Entities
+   3. EntityManager
+   4. StructuredMap
+*** UML class diagram
+- partyTriggers: List<Trigger> // triggers that affect the player & co.
+- nonPartyTrigger: List<Trigger> // affect nonParty entities
+- neutralTriggers: List<Trigger. // affect anyone
++ update(): void // Checks to see if any triggers have been activated and activates them
++ addPartyTrigger(Trigger): void
++ addNonPartyTrigger(Trigger): void
++ addNeutralTrigger(Trigger): void
++ save(): StructuredMap
++ load(structuredMap): void
+*** Implementor
+Kyle
+*** Tester
+Kyle
+\newpage
+
+
+** Trigger 
+*** Overview
+Triggers spawn events that are pushed to the EventManager when a trigger condition is met. Trigger conditions are met when an Entity crosses into the trigger’s range as described by an area of influence. The evaluate() method is responsible for determining if an Entity has caused a trigger condition and consequently creates an event.
+*** Responsibilities
+   1. Spawns an event when a trigger condition is met.
+   2. Tracks if it has expired.
+*** Collaborators
+   1. Events
+   2. EventManager
+   3. Entity
+   4. Area
+   5. StructuredMap
+*** UML class diagram
+<<Interface>>
+   - event
+   - area: Area
+   - handle(Entity): void
+   - moveLocation(location: Location)
+   - hasExpired() : boolean
+   - save(): StructuredMap
+   - load(structuredMap): void
+*** Implementor
+Kyle
+*** Tester
+Kyle
+\newpage
+** SingleUseTrigger
+*** Overview
+A one time use trigger that will be removed by the trigger manager after it has successfully spawned at least one event. (Multiple events could be spawned if multiple Entities caused the trigger condition to be activated simultaneously).
+*** Responsibilities
+Spawns a single series of events.
+*** Collaborators
+   1. Event
+   2. EventManager
+   3. Area
+   4. Entity
+   5. StructuredMap
+*** UML class diagram
+Implements Trigger
+
+
+   - event
+   - area: Area
+   - handle(Entity): void
+   - hasExpired() : boolean
+   - save(): StructuredMap
+   - load(structuredMap): void
+*** Implementor
+Kyle
+*** Tester
+Kyle
+
+
+\newpage
+
+
+** PermanentTrigger
+*** Overview
+This trigger is a trigger that will stay on the map continuously. Consider a lava pit that will always trigger damage.
+*** Responsibilities
+Spawns events whenever entities cross the trigger radius.
+*** Collaborators
+   1. Events
+   2. EventManager
+   3. Area
+   4. Entity
+   5. StructuredMap
+*** UML class diagram
+Implements Trigger
+
+
+   - event
+   - area: Area
+   - handle(Entity): void
+   - hasExpired() : boolean false
+   - save(): StructuredMap
+   - load(structuredMap): void
+*** Implementor
+Kyle
+*** Tester
+Kyle
+\newpage
+
+
+** TimedTrigger 
+*** Overview
+This trigger will vanish from the map after a specified period of time. Before that it will apply events to whatever entity crosses its influence area.
+*** Responsibilities
+   1. Spawns events whenever entities cross the trigger radius until it expires.
+*** Collaborators
+*** Collaborators
+      1. EventManager
+      2. Area
+      3. Entity
+      4. StructuedMap
+*** UML class diagram
+Implements Trigger
+
+
+      - expirationTime : long (ms)
+      - event
+      - area: Area
+      - duration: long (ms)
+      - handle(Entity): void
+      - hasExpired() : boolean
+      - save(): StructuredMap
+      - load(structuredMap): void
+*** Implementor
+Kyle
+*** Tester
+Kyle
+
+
+\newpage
+** ViewableTriggerDecorator
+*** Overview
+This object wraps a regular trigger with a view representation. Most triggers do not need views associated with them, but some things, such as area effects (implemented as triggers) should have Decals associated with them (skull & crossbones, etc).
+*** Responsibilities
+      1. Maintains a TriggerView
+      2. Forwards behavioral requests to the Trigger it wraps
+*** Collaborators
+      1. Trigger
+      2. TriggerView
+      3. StructuredMap
+*** UML class diagram
+Contains a trigger, not implements!
+
+
+      * trigger: Trigger
+      - -decal: Decal
+      - handle(Entity): void
+      - hasExpired() : boolean
+      - save(): StructuredMap
+      - load(structuredMap): void
+*** Implementor
+Kyle
+*** Tester
+Kyle
+
+
+
+
+\newpage
+
+
+* Subsystem 1.4: Area of Influence
+*** Overview
+The Area of Influence system is supported by a few Area abstractions that are used in a few contexts to determine whether or not a location or set of locations is within an area  of influence. Primarily used for light sources and triggers.
+\newpage
+** Area
+*** Overview
+Defines an region of tiles.
+*** Responsibilities
+      1. Check if a specific location is contained in the area.
+      2. Provide the locations that define an area.
+*** Collaborators
+      1. Location
+      2. StructuredMap
+*** UML class diagram
+{{abstract}}
+- range: Int
+- location: Location
++ isInRange(Location) 
++ getCoveredLocations(): List<Location> // Returns locations in this area
++ save(): StructuredMap
++ load(structuredMap): void
+*** Implementor
+Kyle
+*** Tester
+Kyle
+
+
+
+
+\newpage
+
+
+** DirectionalArea
+*** Overview
+Extends a Area by also specifying an angle at which it is oriented. This is appropriate for Linear and Conical effects which are not omni-directional.
+*** Responsibilities
+Checks if a location is contained within the area.
+*** Collaborators
+      1. Check if a specific location is contained in the area.
+      2. Provide the locations that define an area.
+      3. StructuredMap
+*** UML class diagram
+Extends Area
+- range: Int
+- direction: Angle
++ isInRange(Location) 
++ getCoveredLocations(): List<Location> // Returns locations in this area
++ save(): StructuredMap
++ load(structuredMap): void
+*** Implementor
+Kyle
+*** Tester
+Kyle
+
+
+\newpage
+
+
+** LinearArea
+*** Overview
+Defines a linear region of tiles.
+*** Responsibilities
+      1. Check if a specific location is contained in the area.
+      2. Provide the locations that define an area.
+*** Collaborators
+      1. Location
+      2. StructuredMap
+*** UML class diagram
+Extends DirectionalArea
++ isInRange(Location) 
++ getCoveredLocations(): List<Location> // Returns locations in this area
++ save(): StructuredMap
++ load(structuredMap): void
+*** Implementor
+Kyle
+*** Tester
+Kyle
+
+
+
+
+\newpage
+
+
+** ConicalArea
+*** Overview
+Defines a conical area of tiles.
+*** Responsibilities
+      1. Determines whether or not a location is within an area.
+*** Collaborators
+      1. Location
+      2. StructuredMap
+*** UML class diagram
+Extends DirectionalArea
++ isInRange(Location) : boolean
++ getCoveredLocations(): List<Location> // Returns locations in this area
++ save(): StructuredMap
++ load(structuredMap): void
+*** Implementor
+Kyle
+*** Tester
+Kyle
+
+
+
+
+\newpage
+
+
+** RadialArea
+*** Overview
+Defines a radial area. (Circle)
+*** Responsibilities
+      1. Checks whether a location is within its radius.
+*** Collaborators
+      1. Location
+      2. StructuredMap
+*** UML class diagram
+Extends Area
++ isInRange(Location) : boolean
++ getCoveredLocations(): List<Location> // Returns locations in this area
++ save(): StructuredMap
++ load(structuredMap): void
+*** Implementor
+Kyle
+*** Tester
+Kyle
+
+
+
+
+
+
+\newpage
+* Subsystem 1.5: Events
+*** Overview
+Events are objects that perform an action at one time or over a period of time when created. These events will be tied to triggers which are specific areas on the map that fire an event when triggered. There will be many different subclasses of events that have the ability to perform a variety of actions. There might be a StatModifierEvent that heals an entity over a period of time or a button pressed event that plays music when activated. The possibilities are endless with this system. Having this abstraction gives us a lot of power and it’ll allow us to create a very dynamic game that is fun to play.  They are managed by the EventManager, who dispatches their effects to the Entities that they target.
+
+
+\newpage
+
+
+** Event
+*** Overview
+        An event is an abstract class that encapsulates an action that can be performed with a Timer.  One-time use events can be parameterized with a duration of zero.  Events are managed by the EventManager, which handles removing expired events from its event queue.  Also, in certain contexts, an Event won’t know its trigger upon construction.  In these cases, the Trigger reads in the Target for the Event, and sets the Events target in that context.  In using an item (i.e. Potion) from the inventory, the Event may be constructed with its target; In the event of stepping on a TakeDamage AreaEffect (Trigger), it will set the Entity to the Triggers Event Target.  
+        Events are then passed along to the EventManager, who is responsible for dispatching and discontinuing their consequences.
+ALSO, maybe if one doesn’t set the Target for an event throw a UntargetedEventException. (just a thought)
+*** Responsibilities
+      1. Performs an action with a Timeout
+      2. Expire after its duration has passed
+*** Collaborators
+      1. Entity
+      2. EventManager
+ *** UML class diagram
+{{abstract}}
+      - duration: long (ms)
+      #    Event(double duration)
+      - onBegin(): void  //called by the event manager
+      - onExpire(): void //called by the event manager
+      - hasExpired(): boolean
+      - perform(): void
+*** Implementor
+        Josh
+
+
+*** Tester
+        Josh
+
+
+\newpage
+
+
+
+
+** UnsourcedEvent 
+*** Overview
+An UnsourcedEvent is a type of event that is targeted to affect one Entity.  That Entity is the target of the Event, and is the sole receiver of the consequence of the UnsourcedEvent.  
+
+
+*** Responsibilities
+      1. Performs an action on a target entity when perform() is invoked.
+      2. Expire after its duration has passed
+*** Collaborators
+      1) Entity
+      2) EventManager
+ *** UML class diagram
+{{abstract}}
+      - target: Entity
+      - Event(double duration, Entity target)
+      - onBegin(): void  //called by the event manager
+      - onExpire(): void //called by the event manager
+      - hasExpired(): boolean
+      - perform(): void
+*** Implementor
+Josh
+*** Tester
+Josh
+
+
+
+
+** StatisticModifierEvent
+*** Overview
+A StatisticModifierEvent is a type of UnsourcedEvent that modifies the Statistics of the Target Entity.  An example would be getting a Strength Bonus, or Drinking a Potion.
+*** Responsibilities
+      1. Modifies Statistics of a target entity when perform() is invoked.
+*** Collaborators
+     1) Entity
+     2) EventManager
+ *** UML class diagram
+extends UnsourcedEvent
+      - statistics: EntityStatistics
+      - StatisticModifierEvent(Entity, EntityStatistic, duration)
+      - onBegin()
+      - perform() // MixedInstance :’(
+
+
+*** Implementor
+Josh
+*** Tester
+Josh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+** BehaviorModifierEvent
+*** Overview
+A BehaviorModifierEvent is a type of Event, in which a new State/Behavior is added to the Targeted Entity.  For example, adding a ‘Frozen’ behavior to an Entity once hit with an iceball.
+*** Responsibilities
+      1. Adding / Modifying a Behavior of an Entity
+*** Collaborators
+     1) Entity
+     2) EventManager
+ *** UML class diagram
+extends UnsourcedEvent
+      - newBehavior: Behavior
+      - StatisticModifierEvent(Entity, Behavior, duration)
+      - onBegin()
+      - perform() 
+
+
+*** Implementor
+Josh
+*** Tester
+Josh
+
+
+
+
+
+
+
+
+** SkillModifierEvent
+*** Overview
+A SkillModifierEvent modifies the Skill set of a targeted Entity.  For example, consider the Bargain skill.  Once you use Bargain skill, it will reduce the Bargain skill of the targeted Entity, thus reducing the prices of the purchased Items.
+
+
+*** Responsibilities
+      1. Modifies the SkillPoint Levels of a targeted Entity.
+
+
+*** Collaborators
+      1. Entity
+      2. EventManager
+ *** UML class diagram
+extends UnsourcedEvent
+      - target: Entity
+      - Event(double duration, SkillCollection skills, Entity)
+      - onBegin(): void  //called by the event manager
+      - onExpire(): void //called by the event manager
+      - hasExpired(): boolean
+      - perform(): void
+      - setTarget(Entity): void
+*** Implementor
+Josh
+*** Tester
+        Josh
+
+
+
+
+** PrintEvent
+*** Overview
+PrintEvent prints words to a menu or console.  For example, it may print out the stats of the Entity we are observing.
+*** Responsibilities
+      1. Print out things to a Dialog / Console.
+*** Collaborators
+      1. Entity
+      2. EventManager
+ *** UML class diagram
+extends UnsourcedEvent
+      - target: Entity
+      - duration: long (ms)
+      - Event(double duration, Entity,TextHandle)
+      - onBegin(): void  //called by the event manager
+      - onExpire(): void //called by the event manager
+      - hasExpired(): boolean
+      - perform(): void
+*** Implementor
+Josh
+*** Tester
+        Josh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+** SourcedEvent
+*** Overview
+SourcedEvent is a special Event, that affects two entities: A ‘source’ entity, and a ‘target’ entity.  Consider an example PickPocket.  You need to get Items / Money from one Entity, and place them into your Inventory / Bank.
+*** Responsibilities
+      1. Represent an event that affects two entities.
+      2. its perform() will invoke methods on two Entities
+*** Collaborators
+      1. Entity
+      2. EventManager
+ *** UML class diagram
+extends Event
+      - target: Entity
+      - destination: Entity
+      - Event(double duration, Entity target, Entity src)
+      - onBegin(): void  //called by the event manager
+      - onExpire(): void //called by the event manager
+      - hasExpired(): boolean
+      - perform(): void
+*** Implementor
+Josh
+*** Tester
+Josh
+
+
+
+
+
+
+
+
+
+
+** EventManager
+*** Overview
+The EventManager keeps track of current Events. At each game tick, it calls an Event’s perform method and checks to see if it has expired.
+Note that the perform method is called first, to ensure One-Time-Use events run. If it has expired, it removes the Event from the e and allows it to be garbage collected. The EventManager will receive incoming events from spawned by triggers, abilities, and other entities. 
+*** Responsibilities
+      1. Maintain a list of events that are currently active
+      2. Accept new events
+      3. Call each event’s perform method at each game tick
+      4. Remove any events once they expire
+*** Collaborators
+      1. Events
+      2. StructuredMap
+ *** UML class diagram
+      - eventList: List<Event>
+      - update():  void
+      - addEvent(event: Event): void
+       #   removeEvent(event: Event): boolean // Used to remove events if needed
+      - save(): StructuredMap
+      - load(structuredMap): void
+*** Implementor
+Josh
+*** Tester
+        Josh
+
+
+
+
+\newpage
+
+
+* Subsystem 1.6: Items
+*** Overview
+ These in general are “things” in the game. Items can be touched and used. Items in the game fall under a few separate categories. OneShot items are ones that are activated on touch and then cease to exist, these will not be in our item hierarchy they will instead be handled as one time triggers. Obstacle items are items that block the pathway of a player. Interactive items are items that perform some action when they are touched. Takeable items fall into two categories: items that can be “used” and items that are equipment (their “use” is to be equipped).
+
+
+
+
+\newpage
+
+
+** Item
+*** Overview
+A thing in the game.
+*** Responsibilities
+      1. Respond to an entity's touch
+      2. Have a use
+      3. Can act as an obstacle when it is on a map tile
+*** Collaborators
+      1. Entity
+      2. ItemView
+      3. StructuredMap
+*** UML class diagram
+{{ Abstract }}
+- itemView: ItemView
++ touch(Entity) : void
++ use(Entity) : void
++ getInfo(): String
++ save(): StructuredMap
++ load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+
+
+\newpage
+
+
+** TakeableItem
+*** Overview
+An Item that can be picked up by an Entity.
+*** Responsibilities
+Define an item that can be held by an Entity.
+*** Collaborators
+      1. Entity
+      2. StructuredMap
+ *** UML class diagram
+Extends Item
++ touch(Entity) : void
++ use(Entity) : void
++ getInfo(): String
++ save(): StructuredMap
++ load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+
+
+\newpage
+
+
+** ConsumableItem
+*** Overview
+An Item that can be picked up by an Entity, then, from the Inventory Menu, can be used to initiate an Event.  Examples of Events that can be activated would be a ‘HealEvent’, which would then target the Avatar, and heal Damage.  This ConsumableItem described could possibly be a Potion, or a HealStone.
+*** Responsibilities
+Define an item that can be held by an Entity.
+Be Usable from the Inventory Screen.
+Send an Event to the EventManager.
+*** Collaborators
+      1. Event
+      2. Entity
+      3. StructuredMap
+ *** UML class diagram
+Extends TakeableItem
++ touch(Entity) : void
++ use(Entity) : void
++ getInfo(): String
++ save(): StructuredMap
++ load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+
+
+\newpage
+
+
+** InteractiveItem 
+*** Overview
+An item that can be interacted with by an entity, it will perform an action when a prerequisite is met on an entity touching it.
+The scope of InteractiveItems in this game are limited to Door Items, which require a special type of TakeableItem to be present in the Avatar’s Inventory.  The InteractiveItems will block Entity’s movement until the requirement is met.
+*** Responsibilities
+Define an item that can be interacted with.
+*** Collaborators
+      1. Entity
+      2. TakeableItem
+      3. StructuredMap
+*** UML class diagram
+Extends Item
+- requiredItem: TakeableItem
++ touch(Entity) : void
++ use(Entity) : void
++ getInfo(): String
++ save(): StructuredMap
++ load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+\newpage
+
+
+** EquipableItem 
+*** Overview
+Items that can be equipped.  
+*** Responsibilities
+      1. Maintain the equipment’s statistics.
+      2. Knows which slot it gets equipped to
+*** Collaborators
+      1. EquipmentManager
+      2. Statistics
+      3. StructuredMap
+*** UML class diagram
+Extends Item
+      - getStats();
+      - getInfo(): String
+      - save(): StructuredMap
+      - load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+\newpage
+
+
+** ChestPiece
+*** Overview
+A piece of armor worn on the chest.
+*** Responsibilities
+      1. Maintain’s the ChestPiece’s statistics
+      2. Knows it should be equipped to the Armor slot
+*** Collaborators
+      1. EquipmentManager
+      2. Statistics
+      3. StructuredMap
+*** UML class diagram
+Extends Equippable
+      - getStats();
+      - save(): StructuredMap
+      - load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+
+
+
+
+\newpage
+** Boots
+*** Overview
+A piece of armor worn in the Boots slot.
+*** Responsibilities
+      1. Maintain’s the Boots’ statistics
+      2. Knows it should be equipped to the Boots slot
+*** Collaborators
+      1. EquipmentManager
+      2. Statistics
+      3. StructuredMap
+*** UML class diagram
+Extends Equippable
+      - getStats();
+      - save(): StructuredMap
+      - load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+
+
+\newpage
+** Gloves
+*** Overview
+A piece of armor worn in the Gloves slot.
+*** Responsibilities
+      1. Maintain’s the Gloves’ statistics
+      2. Knows it should be equipped to the Gloves slot
+*** Collaborators
+      1. EquipmentManager
+      2. Statistics
+      3. StructuredMap
+*** UML class diagram
+Extends Equippable
+      - getStats();
+      - save(): StructuredMap
+      - load(structuredMap): void
+
+*** Implementor
+Joe
+*** Tester
+        Joe
+\newpage
+** Leggings
+*** Overview
+A piece of armor worn in the Leggings slot.
+*** Responsibilities
+         1. Maintain’s the Leggings’ statistics
+         2. Knows it should be equipped to the Leggings slot
+*** Collaborators
+         1. EquipmentManger
+         2. Statistics
+         3. StructuredMap
+*** UML class diagram
+Extends Equippable
+         - getStats();
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+\newpage
+** Helmet
+*** Overview
+A piece of armor worn in the Helmet slot.
+*** Responsibilities
+         1. Maintain’s the helmets’ statistics
+         2. Knows it should be equipped to the helmet slot
+*** Collaborators
+         1. EquipmentManger
+         2. Statistics
+         3. StructuredMap
+*** UML class diagram
+Extends Equippable
+         - getStats();
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+
+
+\newpage
+** Weapon {abstract}
+*** Overview
+A piece of equipment worn in a weapon slot. Used for attacks.
+Overrides the use function in equipables.
+*** Responsibilities
+         1. Maintain’s the Weapon’s statistics
+         2. Knows it should be equipped to the Weapon’s slot
+*** Collaborators
+         1. EquipmentManager
+         2. StructuredMap
+*** UML class diagram
+         - getStats();
+         - getInfo():
+         - getAttack(); ///?? or just attack()? or…? (discuss)
+         - use(): void
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+\newpage
+** TwoHandedWeapon
+*** Overview
+A weapon requiring two hands. Specific to the Smasher occupation.  A chainsaw would be an example of a TwoHandedWeapon
+*** Responsibilities
+         1. Maintain’s the TwoHandedWeapon’s statistics
+         2. Knows it should be equipped to the TwoHandedWeapon’s slot
+*** Collaborators
+         1. EquipmentManager
+         2. StructuredMap
+*** UML class diagram
+Extends Weapon(I presume?)
+         - getStats();
+         - getAttack(); //??? discuss.
+         - use(): void
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+\newpage
+** OneHandedWeapon
+*** Overview
+A weapon requiring one hand. A Sword would be an example of a OneHandedWeapon
+*** Responsibilities
+         1. Maintain’s the OneHandedWeapon’s statistics
+         2. Knows it should be equipped to the OneHandedWeapon’s slot
+*** Collaborators
+         1. EquipmentManager
+         2. StructuredMap
+*** UML class diagram
+Extends Weapon
+         - getStats();
+         - getAttack(); //??? discuss.
+         - use(): void
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+\newpage
+** BrawlingWeapon
+*** Overview
+A fast “weapon” (or lack thereof..?--discuss: Perhaps a smasher with no weapon automatically equips one of these?) requiring two hands.  Brass Knuckles would be an example of this.
+*** Responsibilities
+         1. Maintain’s the BrawlingWeapon’s statistics
+         2. Knows it should be equipped to the BrawlingWeapon’s slot
+*** Collaborators
+         1. EquipmentManager
+         2. StructuredMap
+*** UML class diagram
+extends Weapon
+         - getStats();
+         - getAttack(); //??? discuss.
+         - use(): void
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+\newpage
+** WeaponVisitor
+*** Overview
+Usedf to get the actual type of the weapon that the Entity uses.  If the Weapon is of the specific type,  it will use the Skills of the Entity,  Brawling, THW, SignleWeapon, Staff, and Bow(Range) to decide the effectiveness of the weapon.  The skill bonus is added to the offensive rating of the entity that is attacking.
+*** Responsibilities
+         1. gets the Skill specific adder for a specific Weapon.
+*** Collaborators
+         1. EquipmentManager
+*** UML class diagram
+         - accept(BrawlingWeapon)
+         - accept(StaffWeapon)
+         - accept(TwoHandedWeapon)
+         - accept(SingleWeapon)
+         - accept(Bow)
+         - getSkillBonus():int
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+\newpage
+* Subsystem 1.7: Projectiles
+*** Overview
+Projectiles are moving things that cause an effect when the collide with either an entity or are blocked by an impassable tile such as a mountain. 
+\newpage
+** Projectile 
+*** Overview
+Its a Projectile. It travels in a straight line from where it started it is simply a moving trigger. It keeps track of it’s own time-out, determined by its speed. The timeout is used to make sure that advance only works after a certain time after the projectile last moved.
+*** Responsibilities
+         1. Move along a trajectory
+         2. Contain a trigger
+         3. Collide with obstacles
+*** Collaborators
+         1. Trigger
+         2. GameMap
+         3. StructuredMap
+*** UML class diagram
+         - direction: Angle
+         - location: Location
+         - speed: double
+         - timeOut: long (ms) // time when advance should work again. (1/speed)
+         - trigger: Trigger
+         - hasExpired(): boolean
+         - advance(): void
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+Jacob
+*** Tester
+        Jacob
+
+
+\newpage
+
+
+** Conical Projectile 
+*** Overview
+Its a Projectile. It travels in a 60°  arc from where it started and it is simply a moving trigger. It keeps track of it’s own time-out, which is determined by its speed. The timeout is used to make sure that advance only works after a certain time after the projectile last moved.
+*** Responsibilities
+         1. Move along a conical trajectory by spawning other projectiles
+         2. Contain a trigger
+         3. Collide with obstacles
+         4. Signal when it has expired
+*** Collaborators
+         1. Trigger
+         2. GameMap
+         3. StructuredMap
+*** UML class diagram
+{{ Extends Projectile }} 
+         - direction: Angle
+         - location: Location
+         - speed: double
+         - timeOut: long (ms) // time when advance should work again. (1/speed)
+         - trigger: Trigger
+         - hasExpired(): boolean
+     /advance(): void
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+Jacob
+*** Tester
+        Jacob
+\newpage
+
+
+** Projectile Manager
+*** Overview
+This is another manager that is in charge of making sure that every projectile is advanced on every game tick. It removes every projectile as soon as it returns hasExpired(). 
+*** Responsibilities
+         1. Advance every projectile on a game tick
+         2. Keep track of every projectile on the map
+         3. Remove projectiles as soon as they expire or are triggered.
+*** Collaborators
+         1. Trigger
+         2. GameMap
+*** UML class diagram
+         - projectiles: List<Projectile>
+         - addProjectile(projectile)
+         - update(): void // Advances all projectiles
+*** Implementor
+Jacob
+*** Tester
+Jacob
+\newpage
+** Angle
+*** Overview
+An enum that specifies a number of different directions. Holds the backing angle in degrees.
+Note: 0 degrees is right and an increasing angle goes counterclockwise
+*** Responsibilities
+         1. Represent a possible direction in a Human-Readable format (UP, Down-Left, …)
+*** Collaborators
+None
+*** UML class diagram
+- theta : int (0 to 360)
++ getAngle() : int
++ sin(): double
++ cos(): double
+[UP, DOWN, UP_RIGHT, UP_LEFT, DOWN_RIGHT, DOWN_LEFT]
++ save(): StructuredMap
++ load(structuredMap): void
+*** Implementor
+Jacob
+*** Tester
+Jacob
+\newpage
+* Inventory Subsystem
+*** Overview
+The Equipment subsystem is used to equip and unequip items from a entity.  It uses a Observer pattern to communicate with the stats.
+
+
+\newpage
+** ItemManager
+*** Overview
+This inventory manager will be contained inside of all entities and will encapsulate the entity’s inventory and equipped inventory and will provide a nice interface for the entity to use.
+*** Responsibilities
+         1. adding items
+         2. removing items
+         3. equipping items
+         4. unequipping items.
+*** Collaborators
+         1. EquipmentInventory
+         2. Inventory
+         3. StructuredMap
+*** UML class diagram
+         - unequip(equippable: Equippable):  boolean
+         - equip(equippable: Equippable): boolean
+         - addItem(item:  Item): boolean
+         - removeItem(item: Item): boolean
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+        Joe
+*** Tester
+        Joe
+\newpage
+** Inventory
+*** Overview
+The inventory is used by the avatar to pick up items and use items.  There will be a limited amount of items that an entity can pick up.
+*** Responsibilities
+         1. adding items
+         2. removing items
+         3. dropping items.
+*** Collaborators
+         1. InvenotrySlot
+         2. Entity
+         3. ItemManager
+         4. StructuredMap
+*** UML class diagram
+         - slots: InvenotrySlot[][]
+         - addItem(item:  TakeableItem): boolean
+         - removeItem(item: TakeableItem): boolean
+         - getItems();  TakeableItem[][]
+         - hasItem(TakeableItem): boolean
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+        Joe
+*** Tester
+        Joe
+\newpage
+** InventorySlot
+*** Overview
+The InventorySlot is used by the avatar to pick up items and use items. 
+*** Responsibilities
+         1. adding items
+         2. removing items
+         3. dropping items.
+*** Collaborators
+         1. InvenotrySlot
+         2. Entity
+         3. ItemManager
+         4. StructuredMap
+*** UML class diagram
+         - addItem(item:  TakeableItem): boolean
+         - removeItem(): TakeableItem
+         - getItem();
+         - hasItem(): boolean
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+        Joe
+*** Tester
+        Joe
+\newpage
+** EquipmentSlot<K extends Equipable>
+ The slots are the equipment slots for the Equipments.  Each is its own specific class, they are not derived from anything.  Each is a Observer and can update the stats of the Entity that they are used by.
+*** Overview
+Contains a Armor equipable item. Is a Aggregate and can only equip this type of item. Every un/equip updates the stats appropriately.
+*** Responsibilities
+         1. equip
+         2. unequip
+         3. getStatBonus
+         4. update the stats subjects.
+*** Collaborators
+         1. Equipable
+         2. StructuredMap
+*** UML class diagram
+         - equip(<K extends Equipable>)
+         - unequip(): <K extends Equipable>
+         - hasEquipment(): boolean
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+        Joe
+*** Tester
+        Joe
+
+
+
+
+
+
+\newpage
+
+
+** DoubleEquipmentSlot
+This is a Composite of the Shield and the Weapon Slot used by the Equipment.  It will generate a Shield and a Weapon Slot in one.
+*** Overview
+Contains a Armor equipable item. Is a Aggregate and can only equip this type of item. Every un/equip updates the stats appropriately.
+*** Responsibilities
+         1. equip a Weapon (OneHanded, TwoHanded, Brawling)
+         2. equip Shield
+         3. unequip Shield
+         4. uneqip Weapon  (OneHanded, TwoHanded, Brawling)
+         5. getStatBonus
+         6. update stats
+*** Collaborators
+         1. Shield
+         2. Weapon
+         3. TwoHanded
+         4. Equipment
+         5. StructuredMap
+*** UML class diagram
+Extends EquipmentSlot
+         - unequip();  TwoHandedWeapon
+         - has(): boolean
+         - unequipShield(): Shield
+         - unequipWeapon(): Weapon
+         - unequipTHW(): TwoHandedWeapon
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+Joe        
+*** Tester
+        Joe
+\newpage
+** EquipmentManager
+*** Overview
+This EquipmentManager contains all the equipment slots that an entity can hold. It also manages the responsibility of maintaining that only one type of a piece of Equipable can be equipped at a time.
+*** Responsibilities
+         1. Contain all the different equipment slots for all the different equipment types
+         2. Ensures that only one type of each item can be equipped
+*** Collaborators
+         1. EquipmentSlot
+         2. Equipable
+         3. StructuredMap
+*** UML class diagram
+         - equipHelmet(Helmet): void
+         - equipChestPiece(ChestPiece): void
+         - equipLeggings(Leggings): void
+         - equipBoots(Boots): void
+         - equipGloves(Gloves): void
+         - equipShield(Shield): void
+         - equipWeapon(Weapon): void
+         - unequipHelmet(item: Equipable): void
+         - unequipChestPiece(ChestPiece): void
+         - unequipLeggings(Leggings): void
+         - unequipBoots(Boots): void
+         - unequipGloves(Gloves): void
+         - unequipShield(Shield): void
+         - unequipWeapon(Weapon): void
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+Joe
+*** Tester
+        Joe
+\newpage
+
+
+** TradingManager
+*** Overview
+Allows an Avatar to trade with the NPC.  It allows a transaction between the Avatar and the NPC with one party spending Gold and the other sending a TakeableItem.
+*** Responsibilities
+         1. buy
+         2. sell
+         3. getPrice
+*** Collaborators
+         1. NPC
+         2. barter
+         3. Avatar
+         4. Invenotry
+*** UML class diagram
+         - buy(Item,Avatar)
+         - sell(Item,Avatar)
+         - getInfo(item)
+*** Implementor
+        Joe
+*** Tester
+        Joe
+\newpage
+* SubSystem 1.9: Behaviors
+*** Overview
+Behaviors are Entity states, these can be applied by items, spells, other Behaviors, engagements, and other things.
+
+
+
+
+\newpage
+** AvatarControllerMachine
+*** Overview
+The Avatar ControllerMachine allows the avatar to change its control sets.  It also allows the Avatar to change its Behavior state, allowing it to be controlled by NPC behaviors.
+*** Responsibilities
+         1. sets the Controllers for the Avatar
+         2. can clear all the COntrollers of the Avatar, and allow it to perform NPC Behaviors.
+*** Collaborators
+         1. Entities
+         2. Behavior
+*** UML class diagram
+         - setControllers()
+*** Implementor
+        Jacob
+*** Tester
+        Jacob
+\newpage
+** AvatarControllerState
+*** Overview
+A Avatar controller is a interface for how a Avatar Controller State can change by resetting the Controllers through this controller State.
+*** Responsibilities
+         1. Changes the Avatar Controllers
+*** Collaborators
+         1. Avatar
+         2. ControllerManager
+*** UML class diagram
+         - setControllers()
+*** Implementor
+        Jacob
+*** Tester
+        Jacob
+
+
+
+
+\newpage
+
+
+** NormalController
+*** Overview
+Allows the Avatar to have its Controllers. 
+*** Responsibilities
+         1. Changes the Avatar Controllers
+*** Collaborators
+         1. Avatar
+         2. ControllerManager
+*** UML class diagram
+         - setControllers()
+*** Implementor
+        Jacob
+*** Tester
+        Jacob
+\newpage
+** DefaultState
+*** Overview
+The NPC’s normal movement or standing behavior.
+*** Responsibilities
+         1. Performs the normal behavior of the NPC
+*** Collaborators
+         1. Entities
+         2. Behavior
+*** UML class diagram
+{{interface}}
+         - perform()
+*** Implementor
+        Jacob
+*** Tester
+        Jacob
+
+
+\newpage
+** Stand
+*** Overview
+The NPC’s behavior default behavior is Freeze.
+*** Responsibilities
+         1. Freezes the NPC.  They cannot move, will not attack, and cannot use spells.
+*** Collaborators
+         1. Entities
+         2. Behavior
+*** UML class diagram
+{{implements DefaultState}}
+         - perform()
+*** Implementor
+        Jacob        
+*** Tester
+        Jacob
+\newpage
+** Patrol
+*** Overview
+The NPC’s behavior default behavior is to Patrol in a movement pattern.
+*** Responsibilities
+         1. The NPC will move in a pattern.
+*** Collaborators
+         1. Entities
+         2. Behavior
+*** UML class diagram
+{{implements DefaultState}}
+         - perform()
+*** Implementor
+        Jacob
+*** Tester
+        Jacob
+
+
+\newpage
+** Coward
+*** Overview
+If the ObserveState identifies a 
+*** Responsibilities
+         1. The NPC will move in a pattern.
+*** Collaborators
+         1. Entities
+         2. Behavior
+*** UML class diagram
+{{implements DefaultState}}
+         - perform()
+*** Implementor
+        Jacob
+*** Tester
+        Jacob
+
+
+\newpage
+** InteractState
+*** Overview
+The NPC’s normal interact behavior.
+*** Responsibilities
+         1. Performs the normal interact behavior of the NPC.
+*** Collaborators
+         1. Entities
+         2. Behavior
+*** UML class diagram
+{{interface}}
+         - interact(Entity)
+*** Implementor
+        Jacob
+*** Tester
+        Jacob
+
+
+\newpage
+** Barter
+*** Overview
+The NPC’s interact behavior will perform a Bartering with the Avatar.
+*** Responsibilities
+         1. Performs the normal interact behavior of the NPC.
+*** Collaborators
+         1. Entities
+         2. Behavior
+*** UML class diagram
+{{implements Interact}}
+         - interact(Entity)
+*** Implementor
+        Jacob        
+*** Tester
+        Jacob
+
+
+\newpage
+** Mount
+*** Overview
+The NPC’s interact behavior will allow the Avatar to Mount the Mount.
+*** Responsibilities
+         1. Performs the normal interact behavior of the NPC.
+*** Collaborators
+         1. Entities
+         2. Behavior
+*** UML class diagram
+{{implements Interact}}
+         - interact(Entity)
+*** Implementor
+        Jacob        
+*** Tester
+        Jacob
+
+
+\newpage
+** Talk
+*** Overview
+The NPC’s interact behavior will allow the Avatar to Talk to it.
+*** Responsibilities
+         1. Talks
+*** Collaborators
+         1. Entities
+         2. Behavior
+*** UML class diagram
+{{implements Interact}}
+         - interact(Entity)
+*** Implementor
+        Jacob        
+*** Tester
+        Jacob
+
+
+
+
+\newpage
+
+
+** Attack
+*** Overview
+The NPC’s interact behavior will allow the NPC to attack on interactions.
+*** Responsibilities
+         1. Attack
+*** Collaborators
+         1. Entities
+         2. Behavior
+*** UML class diagram
+{{implements Interact}}
+         - interact(Entity)
+*** Implementor
+        Jacob        
+*** Tester
+        Jacob
+
+
+\newpage
+
+
+** ObserveState
+*** Overview
+The NPC’s observing.
+*** Responsibilities
+         1. Performs the normal behavior of the NPC
+*** Collaborators
+         1. Entities
+         2. Behavior
+*** UML class diagram
+{{interface}}
+         - observe()
+*** Implementor
+        Jacob        
+*** Tester
+        Jacob
+
+
+\newpage
+** SightTracking
+*** Overview
+The NPC’s normal movement or standing behavior.
+*** Responsibilities
+         1. Allows the NPC to notice other Entities,  primarly the Avatar.
+*** Collaborators
+         1. Entities
+         2. Behavior
+*** UML class diagram
+{{implements ObserverState}}
+         - observe()
+*** Implementor
+        Jacob        
+*** Tester
+        Jacob
+
+
+\newpage
+** NPCBehaviorable
+*** Overview
+The NPCbehavior class belongs to NPCs and defines 3 states: default, interact, and observe that defines their actions based on an event. It also has a behavior that gets pushed to the specific entity that this behavior belongs to on attack. This new attack behavior defines a new set of states that define different actions for the entity to take. 
+*** Responsibilities
+         1. To be performed.
+         2. To interact
+         3. To Observe
+         4. onAttack
+*** Collaborators
+         1. NPC
+         2. DefaultState
+         3. InteractState
+         4. ObserveState
+*** UML class diagram
+{{interface}}
+         - perform()
+         - interact(Entity)
+         - observe()
+         - onAttack()
+         - onExit()
+         - onEnter()
+*** Implementor
+        Jacob
+*** Tester
+        Jacob
+\newpage
+** Behavior
+*** Overview
+A NPC specific behavior is very complex,  as it defines the AI of a NPC.  They can be as complex as you want to make them.  Given these infinite possibilities, we will make a behavior have 3 states interact, default, and observe and the given onAttack Behavior change and the onObserve behavior change.   So basically a Behavior is comprised of 3 states and 2 possible Behaviors that can be activated within.  The two other behaviors will allow the NPC to change state at any time.
+*** Responsibilities
+         1. Performs the default state
+         2. observes from the observe state
+         3. Interacts from the interact State
+         4. Changes Behavior on Observeing
+         5. Canges Behavior on Attack
+*** Collaborators
+         1. Entities
+         2. NPCStateMachine
+*** UML class diagram
+{{implements Behaviorable}}
+         - perform()
+         - interact(Entity)
+         - observe()
+*** Implementor
+        Jacob
+*** Tester
+        Jacob
+
+
+        
+
+
+
+
+\newpage
+
+
+** NPCStateMachine
+*** Overview
+        A Preferred behavior is passed to the State to perform that behavior.  The entity will continue to perform the peek behavior that it has, until the behavior is timed out or if the state pushes another behavior onto the top. Used by all Entities to control their state.  Manages the killing of behaviors, and the activation of behaviors
+*** Responsibilities
+         1. push states on
+         2. perform a state
+         3. revert a state
+         4. kill all states
+*** Collaborators
+         1. Entities
+         2. Abilities
+         3. Effects
+*** UML class diagram
+         - perform()
+         - interact(Entity)
+         - observe()
+         - push(Behavior)
+         - pop():Behavior
+       #    onExit()
+       #    onEnter()
+*** Implementor
+        Jacob        
+*** Tester
+        Jacob
+
+
+        
+
+
+
+
+
+
+
+
+
+        
+* Subsystem Light
+*** Overview
+The light subsystem implements and manages the fog of war. This system will have a LightMap that maintains a visibility level for every tile and is responsible for raising the visibility level of a location when a light source is present and lowering the visibility level of unseen locations. This LightMap will be managed by the LightManager which will be the class that coordinates the whole operation on every game tick.
+\newpage
+
+
+** LightManager
+*** Overview
+        The light manager coordinates the LightMap. It maintains all the light sources currently registered and tells the light map to illuminate based on the light sources that the manager has registered. 
+*** Responsibilities
+         1. Keep track of all the light sources currently on the map
+         2. Tell the lightmap to dim all its lights every game update
+         3. Tell the game map to illuminate an area around a lightsource
+*** Collaborators
+         1. Light Map
+         2. LightSource
+         3. StructuredMap
+*** UML class diagram
+         - lightSources: List<LightSources>
+         - lightMap: LightMap
+         - update()
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+Matt
+*** Tester
+Matt
+\newpage
+** LightMap
+*** Overview
+        The light map maintains the visibility levels of all the locations on the map and maintains if the tile has been visited before. This will be used by the view to determine when to draw an entity on a map and also when to gray out the tile. The LightManager will be in charge of dimming all the lights on the whole map when instructed and illuminating ( increasing the visibility level of a tile ). This allows the lights to slowly dim when the area is not illuminated. 
+*** Responsibilities
+         1. Keep track of the visibility and isVisited attributes for every location on the map
+         2. Dim all the visibilities on command
+         3. Raise the visibilities of all the locations that are illuminated by a given light source
+*** Collaborators
+         1. Light Source
+         2. StructuredMap
+*** UML class diagram
+         - visiblities: Visiblities[][]
+         - dimLights(): void
+         - illuminate(lightSource): void
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+        Matt
+*** Tester
+        Matt
+        
+\newpage
+
+
+** LightSource
+*** Overview
+        The LightSource defines a geometry that is illuminated by a lightsource. 
+*** Responsibilities
+         1. A single point of light on the map
+*** Collaborators
+         1. StructuredMap
+*** UML class diagram
+{{abstract}}
+         - visiblitie: Visiblitie
+         - dimLight(): void
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+        Matt
+*** Tester
+        Matt
+\newpage
+
+
+** Static Light Source
+*** Overview
+A source of light that does not move. 
+*** Responsibilities
+*** Collaborators
+         1. StructuredMap
+*** UML class diagram
+{{extends Light source}}
+        
+*** Implementor
+        Matt
+*** Tester
+Matt
+\newpage
+** Dynamic Light Source
+*** Overview
+A source of light that does move
+*** Responsibilities
+*** Collaborators
+         1. StructuredMap
+*** UML class diagram
+{{extends Light source}}
+         - move(...):void
+*** Implementor
+        Matt
+*** Tester
+        Matt
+\newpage
+* Subsystem 1.11: Statistics
+*** Overview
+Statistics are used to represent the power and skill of an entity or item. 
+\newpage
+** Statistics
+*** Overview
+        Represent the power and skill of various entities and items.
+*** Responsibilities
+         1. Hold values for each of the different properties that are being tracked.
+         2. Get the derived properties at a current instant in time
+*** Collaborators
+         1. Equipped Inventory
+         2. Equippable Items
+         3. StructureMap
+*** UML class diagram
+         - Strength
+         - Agility
+         - etc…
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+        JR
+*** Tester
+        JR
+\newpage
+** EntityStatistics
+*** Overview
+        Represent the power and skills of an entity. This subclass contains extra information relevant to entities, like current Health and current Mana
+*** Responsibilities
+         1. Hold values for each of the different entity specific properties that are being tracked.
+         2. Get the derived properties at a current instant in time.
+         3. Keep track of the extra information (currentHealth, currrentMana)
+*** Collaborators
+         1. Equipped Inventory
+         2. Equippable Items
+         3. StructuredMap
+*** UML class diagram
+Extends Statistics
+         - CurrentHealth
+         - CurrentMana
+         - Experience
+         - Lives Left
+         - getOffensiveRating(): int
+         - getDefensiveRating(): int
+         - getArmorRating(): int
+         - save(): StructuredMap
+         - load(structuredMap): void
+*** Implementor
+        JR
+*** Tester
+        JR
+
+
+\newpage
+
+
+* Subsystem 1.12.1 State Machinery
+*** Overview
+Much of the game is driven by a number of state machines. These state machines allow states to be pushed, popped, and swapped. There are 3 subcategories of states: GameStates, which handle transitions between menus, NPCStates, which determine entity behavior, and AvatarStates which modify an Avatar’s behavior.
+\newpage
+** StateMachine<T extends State>
+*** Overview
+The StateMachine is a simple container class that allows states to be pushed, popped, and swapped. It calls template methods on each state for when states are first entered, paused, resumed, and exited--modelled much like Activities in android.
+*** Responsibilities
+         1. Contain a stack of states
+         2. Provide ways for states to transition
+         3. Call the appropriate methods on a state as they are pushed/popped/swapped.
+*** Collaborators
+         1. State
+*** UML class diagram
+         - push(T): void
+         - swap(T): void
+         - pop(): void
+*** Implementor
+        JR
+*** Tester
+        JR
+\newpage
+** State
+*** Overview
+State is an interface for providing uniform functionality to specific kinds of states.
+*** Responsibilities
+         1. Provide hooks for State implementors to perform appropriate behavior on state transitions.
+         2. Handle StateTransitions
+*** Collaborators
+         1. StateMachine
+*** UML class diagram
+<<Interface>>
+         - onEnter(): void
+         - onPause(): void
+         - onResume(): void
+         - onExit(): void
+*** Implementor
+        JR
+*** Tester
+        JR
+\newpage
+* SubSubSystem 1.12.2 GameStates
+*** Overview
+Menu transitions & popup dialogues are handled by game state transitions. These are all held by a StateMachine<GameState> within the model.
+
+
+\newpage
+
+
+** GameState
+*** Overview
+A game state is associated with the current view layout & controller. As game states are transitioned, we are generally moving from menu to menu.
+*** Responsibilities
+         1. Present a new view layout (or overlay, in the case of inventory/shops/etc)
+         2. Setup control logic for the current view
+*** Collaborators
+         1. StateMachine<GameState>
+*** UML class diagram
+implements State
+         - onEnter(): void //initialize and attach a view layout object
+         - onPause(): void 
+         - onResume(): void
+         - onExit(): void
+       # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+       # getController(): (Controller??) {{Abstract}}
+*** Implementor
+        JR
+*** Tester
+        JR
+
+
+\newpage
+
+
+** MainMenuState
+*** Overview
+The game state associated with the Main Menu.
+*** Responsibilities
+         1. Register the MainMenuLayout in the view.
+         2. Instantiate and register the MainMenuController.
+*** Collaborators
+         1. StateMachine<GameState>
+*** UML class diagram
+extends GameState
+       # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+       # getController(): (Controller??) {{Abstract}}
+*** Implementor
+        JR
+*** Tester
+        JR
+
+
+\newpage
+
+
+** CharacterSelectionMenuState
+*** Overview
+The game state associated with a new game in which a player selects a new character. Can be reached only from the Main Menu.
+*** Responsibilities
+         1. Register the CharacterSelectionMenuLayout in the view.
+         2. Instantiate and register the CharacterSelectionMenuController.
+*** Collaborators
+         1. StateMachine<GameState>
+*** UML class diagram
+extends GameState
+       # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+       # getController(): (Controller??) {{Abstract}}
+*** Implementor
+        JR
+*** Tester
+        JR
+
+
+\newpage
+** LoadGameMenuState
+*** Overview
+The game state associated with the “Load Game” menu. Can be reached from the Main Menu and from the Pause Menu.
+*** Responsibilities
+         1. Register the LoadGameMenuLayout in the view.
+         2. Instantiate and register the LoadGameMenuController.
+*** Collaborators
+         1. StateMachine<GameState>
+*** UML class diagram
+extends GameState
+       # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+       # getController(): (Controller??) {{Abstract}}
+*** Implementor
+        JR
+*** Tester
+        JR
+
+
+\newpage
+** SaveGameMenuState
+*** Overview
+The game state associated with the “Save Game” menu. Can only be reached from the Pause Menu.
+*** Responsibilities
+         1. Register the SaveGameMenuLayout in the view.
+         2. Instantiate and register the LoadGameMenuController.
+*** Collaborators
+         1. StateMachine<GameState>
+*** UML class diagram
+extends GameState
+       # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+       # getController(): (Controller??) {{Abstract}}
+*** Implementor
+        JR
+*** Tester
+        JR
+
+
+
+
+
+
+\newpage
+
+
+** OptionsMenuState
+*** Overview
+The game state associated with an open options menu. Options can be accessed from the Pause Menu.
+*** Responsibilities
+         1. Register the OptionsMenuLayout in the view.
+         2. Instantiate and register the PauseMenuController.
+*** Collaborators
+         1. StateMachine<GameState>
+*** UML class diagram
+extends GameState
+       # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+       # getController(): (Controller??) {{Abstract}}
+*** Implementor
+        JR
+*** Tester
+        JR
+
+
+\newpage
+** GameplayState
+*** Overview
+The game state associated with actual gameplay. Can be entered only after loading a game which occurs after the LoadGameMenu state or after the CharacterSelectionMenu state (which also loads a preconfigured game save).
+*** Responsibilities
+         1. Register the GameplayLayout in the view.
+         2. Instantiate and register the GameplayController.
+         3. Accepts Views from the Model, and pushes them up to the GameplayLayout
+*** Collaborators
+         1. StateMachine<GameState>
+*** UML class diagram
+extends GameState
+       # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+       # getController(): (Controller??) {{Abstract}}
+       + add/registerItemView(itemView: ItemView)
+       + add/registerEntityView(entityView: EntityView)
+       + add/registerLightView(lightView: LightView)
+       + add/registerTileView(TileView: TileView)
+*** Implementor
+        JR
+*** Tester
+        JR
+
+
+\newpage
+** PauseMenuState
+*** Overview
+The game state associated with an open Pause Menu. Acts as a pop-up, rather than completely replacing the previous view. Provides access to other menus--Load Game, Save Game, Options, Main Menu, and a Resume Gameplay button that takes you back to gameplay.
+*** Responsibilities
+         1. Register the PauseMenuLayout in the view.
+         2. Instantiate and register the PauseMenuController.
+*** Collaborators
+         1. StateMachine<GameState>
+*** UML class diagram
+extends GameState
+         - onEnter(): void //overrides normal view behavior to overlay instead
+         - onExit(): void //removes popup layer
+       # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+       # getController(): (Controller??) {{Abstract}}
+*** Implementor
+        JR
+*** Tester
+        JR
+
+
+\newpage
+** InventoryMenuState
+*** Overview
+The game state associated with an open Inventory Menu. Acts as a pop-up, rather than completely replacing the previous view.
+*** Responsibilities
+         1. Register the InventoryMenuLayout in the view.
+         2. Instantiate and register the InventoryMenuController.
+*** Collaborators
+         1. StateMachine<GameState>
+*** UML class diagram
+extends GameState
+         - onEnter(): void //overrides normal view behavior to overlay instead
+         - onExit(): void //removes popup layer
+       # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+       # getController(): (Controller??) {{Abstract}}
+*** Implementor
+        JR
+*** Tester
+        JR
+
+
+\newpage
+** TradeMenuState
+*** Overview
+The game state associated with an open trading menu. Acts as a pop-up, rather than completely replacing the previous view.
+*** Responsibilities
+         1. Register the TradeMenuLayout in the view.
+         2. Instantiate and register the TradeMenuController.
+*** Collaborators
+         1. StateMachine<GameState>
+*** UML class diagram
+extends GameState
+         - onEnter(): void //overrides normal view behavior to overlay instead
+         - onExit(): void //removes popup layer
+       # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+       # getController(): (Controller??) {{Abstract}}
+*** Implementor
+        JR
+*** Tester
+        JR
+
+
+\newpage
+** SkillsMenuState
+*** Overview
+The game state associated with an open skills menu. Acts as a pop-up, rather than completely replacing the previous view.
+*** Responsibilities
+         1. Register the SkillsMenuLayout in the view.
+         2. Instantiate and register the SkillsMenuController.
+*** Collaborators
+         1. StateMachine<GameState>
+*** UML class diagram
+extends GameState
+         - onEnter(): void //overrides normal view behavior to overlay instead
+         - onExit(): void //removes popup layer
+       # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
+       # getController(): (Controller??) {{Abstract}}
+*** Implementor
+        JR
+*** Tester
+        JR
+
+
+\newpage
+
+
+* SubSubSystem 1.13 Loading / Saving
+*** Overview
+This system covers utility classes for loading and saving the state of the game. We use a JSON parser to produce a helper object of type StructuredMap. The StructuredMap’s role is to provided typed access to saved data from the JSON.
+\newpage
+** StructuredMap
+*** Overview
+StructuredMaps are simply hashmaps of String to a structured map type that provide typed access to the different objects they hold.
+*** Responsibilities
+         1. Act as a DAO.
+*** Collaborators
+None.
+*** UML class diagram
++ put(): void
++ getString(key : String): String
++ getDouble(key : String): Double
++ getInteger(key : String): Integer
++ getBoolean(key : String): Boolean
++ getStructuredMap(key : String): StructuredMap
++ getStructuredMapArray(key : String): StructuredMap[]
++ getIntArray(key : String): int[]
++ getDoubleArray(key : String): double[]
++ getKeys(): Set<String>
+*** Implementor
+Daniel
+*** Tester
+Daniel
+\newpage
+** JSONParser
+*** Overview
+This is a utility class that parses JSON. It converts a JSONToken stream into a StructuredMap.
+*** Responsibilities
+         1. Parse JSON and return a StructuredMap
+*** Collaborators
+         1. JSONScanner
+         2. JSONToken
+*** UML class diagram
++ getStructuredMapFromJSON(String : json): StructuredMap
+*** Implementor
+Daniel
+*** Tester
+Daniel
+\newpage
+** JSONScanner
+*** Overview
+This class simply tokenizes JSON.
+*** Responsibilities
+         1. Tokenize JSON.
+*** Collaborators
+         1. JSONScanner
+         2. JSONToken
+*** UML class diagram
++ getTokens(String : json): Queue<JSONToken>
+*** Implementor
+Daniel
+*** Tester
+Daniel
+\newpage
+** JSONToken
+*** Overview
+This is an enum of all valid JSON tokens.
+*** Responsibilities
+         1. Represent JSON tokens.
+*** Collaborators
+None.
+*** UML class diagram
+[  LBRACE, RBRACE, LBRACKET, RBRACKET, COLON, COMMA, TRUE, FALSE, NULL, STRING, DOUBLE, INTEGER ]
+*** Implementor
+Daniel
+*** Tester
+Daniel
+\newpage
+** JSONFormatter
+*** Overview
+This class formats a StructuredMap into a String. Produces proper, tabbed, printable, JSON.
+*** Responsibilities
+         1. Convert a StructuredMap into a String.
+*** Collaborators
+None.
+*** UML class diagram
+         - getStringRepresentation(StructuredMap): String
+*** Implementor
+Daniel
+*** Tester
+Daniel
+\newpage
+
+
+* SubSubSystem 1.13 Dialog
+*** Overview
+This is the Dialog that we can Log to the system to show on the DialogLayout.  Use this to talk to the Avatar.
+\newpage
+* Subsystem 2: View
+*** Overview:
+The view is what the user interacts with. It will show a visible representation of a portion of model on the screen and will provide a panel for the controller to attach to and listen for key presses. This subsystem will consist of individual views that will be swapped out at runtime depending on the state of the game. 
+\newpage
+
+
+** Dialog
+*** Overview
+This is the model that communicates and updates the ViewDialog.  Takes input, and output. It is a Singleton.
+*** Responsibilities
+         1. write
+         2. read
+*** Collaborators
+         1. Everything can be
+*** UML class diagram
+         - print(String)
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+
+
+\newpage
+* Subsystem 2.1: View Layouts
+*** Overview
+Layouts are the top level containers associated with a particular menu / GameState.  Layouts extend JPanel, and thus can display different views.  Some Layouts (such as Layouts with menus), can be decorated with JComponents (or ViewComponents).  Menu Layouts use the Mouse to advance to the next State and Layout.  
+\newpage
+** MainMenuLayout
+*** Overview
+Constitutes the entirety of the view for the MainMenu.  Uses MouseEvents / JButtons / ViewComponents to navigate.
+*** Responsibilities
+         1. Contain all the components in the MainMenu
+*** Collaborators
+         1. TextLabel (Main Menu)
+         1. MenuButton (New Game, Load Game, Exit Game)
+         2. Calculate the size & location of each contained component
+*** UML class diagram
+extends JPanel
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+\newpage
+** PauseMenuLayout
+*** Overview
+A layout. Game Paused. Handles the game paused view.
+*** Responsibilities
+         1. Contain all the components in the Pause Menu
+*** Collaborators
+         1. TextLabel (Main Menu)
+         2. MenuButton (Options, Save State, Return to Main Menu)
+         3. Calculate the size & location of each contained component
+*** UML class diagram
+extends JPanel
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+\newpage
+** CharacterSelectionLayout
+*** Overview
+Constitutes the entirety of the view for the new character selection screen.
+
+
+*** Responsibilities
+         1. Contain all the components in the CharacterSelectionMenu.
+         2. Calculate the size & location of each contained component
+*** Collaborators
+         1. TextLabel (Select a Character)
+         2. CharacterButton (Smasher, Summoner, Sneak)
+         3. MenuButton (Back)
+*** UML class diagram
+extends JPanel
+
+
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+\newpage
+** LoadMenuLayout
+*** Overview
+Constitutes the entirety of the view for the LoadMenu.
+*** Responsibilities
+         1. Contain all the components in the LoadMenu
+         2. Calculate the size & location of each contained component
+*** Collaborators
+         1. TextLabel (Select a Game to Load)
+         2. SaveSlotButton (1-5)
+         3. MenuButton (Back, Load)
+*** UML class diagram
+extends JPanel
+        
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+\newpage
+** InventoryMenuLayout
+*** Overview
+Constitutes the entirety of the view for the Inventory Menu.
+*** Responsibilities
+         1. Contain all the components in the Inventory Menu
+         2. Calculate the size & location of each contained component
+*** Collaborators
+         1. StatisticsView
+         2. InventoryView
+         3. EquipmentView
+         4. MenuButton (Back)
+*** UML class diagram
+extends JPanel
+        
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+\newpage
+** SkillsMenuLayout
+*** Overview
+Constitutes the entirety of the view for the Skills Menu.
+*** Responsibilities
+         1. Contain all the components in the Skills Menu
+         2. Calculate the size & location of each contained component
+*** Collaborators
+         1. SkillBarView (One for each skill)
+         2. MenuButton (Back)
+         3. PlusButton (One for each skill)
+         4. TextLabel (Skills)
+*** UML class diagram
+extends JPanel
+        
+*** Implementor
+        Daniel
+*** Tester
+        Daniel
+
+
+\newpage
+** SaveMenuLayout
+*** Overview
+Constitutes the entirety of the view for the LoadMenu.
+*** Responsibilities
+         1. Contain all the components in the LoadMenu
+         2. Calculate the size & location of each contained component
+*** Collaborators
+         1. TextLabel (Select a Game to Load)
+         2. SaveSlotButton (1-5)
+         3. MenuButton (Back, Save)
+*** UML class diagram
+extends JPanel
+        
+*** Implementor
+Daniel
+*** Tester
+Daniel
+
+
+\newpage
+** GameplayLayout
+*** Overview
+Constitutes the entirety of the view for the Gameplay view.  The Gameplay layout appropriately layers the different views that comprise it.  It will first draw the GameMapView, then the LightMapView, then the EntityView and then the HUDView.  It only updates things in the LightMapView.
+*** Responsibilities
+         1. Contain all the components in the Gameplay view
+         2. Calculate the size & location of each contained component
+*** Collaborators
+         1. GameMapView
+         2. LightMapView
+         3. EntityView
+         4. HUDView
+*** UML class diagram
+extends JPanel
+ + add/registerItemView(itemView: ItemView)
+ + add/registerEntityView(entityView: EntityView)
+ + add/registerLightView(lightView: LightView)
+ + add/registerTileView(TileView: TileView)
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+\newpage
+
+
+** AbilityLayout
+*** Overview
+Displays the Current Abilities of the Avatar in any state.  The abilities in this Layout shade and show the respective time left on the Ability around the cooldown of the Ability view.
+*** Responsibilities
+         1. Contains the View of the Abilities for the User to interact with.
+*** Collaborators
+         1. GameView
+*** UML class diagram
+extends JPanel
+         - add(Ability)
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+\newpage
+
+
+** DialogLayout
+*** Overview
+Displays the information that the user inputs and the surrounds write to the Dialog in the Model.
+*** Responsibilities
+         1. Responsible for displaying the Dialog Model writes.
+*** Collaborators
+         1. DialogLog
+*** UML class diagram
+extends JPanel
+         - add(String)
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+\newpage
+
+
+** TradingView
+*** Overview
+Displays the trading of a Barter with the Avatar.  This view shows the items that an Avatar can buy or sell to the Barter.
+*** Responsibilities
+         1. Responsible for the trading and selling of the items.
+*** Collaborators
+         1. DialogLog
+*** UML class diagram
+extends JPanel
+         - addBarter(item)
+         -  addCustomer(item)
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+\newpage
+
+
+** OptionAndControlsLayout
+*** Overview
+Displays a the list of options and Controllers for the User to adjust to their key bindings.
+*** Responsibilities
+         1. Display each Controller and Options.
+*** Collaborators
+         1. Controllers
+*** UML class diagram
+         - set(String[]);
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+\newpage
+* Subsystem 2.2: View Components
+*** Overview
+Reusable view components used across various other views & layouts.
+\newpage
+** TextLabel
+*** Overview
+Provide a view for displaying text that is properly themed with the rest of the game.
+*** Responsibilities
+         1. Display text with a consistent theme
+*** Collaborators
+None.
+*** UML class diagram
+        
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+\newpage
+** MenuButton
+*** Overview
+A text-based button. Provides a consistent look and feel across the game.
+*** Responsibilities
+         1. Display menu buttons with a consistent theme
+*** Collaborators
+None.
+*** UML class diagram
+        
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+
+
+\newpage
+** IncrementButton
+*** Overview
+A graphical button used for incrementing skills, volume, etc. To be paired with slider-type components.
+*** Responsibilities
+         1. Act as a button with a plus sign on it.
+*** Collaborators
+None.
+*** UML class diagram
+        
+*** Implementor
+        Daniel
+*** Tester
+        Daniel
+
+
+\newpage
+** DecrementButton
+*** Overview
+A graphical button used for decrementing volume, etc. To be paired with slider-type components.
+*** Responsibilities
+         1. Act as a button with a minus sign on it.
+*** Collaborators
+None.
+*** UML class diagram
+        
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+
+
+\newpage
+** StatBar
+*** Overview
+A graphical element for displaying a bar that is filled proportionally to the maximum possible value. (ex: health bar, mana bar)
+*** Responsibilities
+         1. Display a stat proportional to its maximum value as a bar.
+*** Collaborators
+None.
+*** UML class diagram
+        
+*** Implementor
+        Daniel
+*** Tester
+Daniel
+\newpage
+
+
+
+
+* SubSubSystem 2.2.1 Basic Views
+*** Overview
+Something which things that are visible in the model contain, which they can use to tell the view to update, following MVC where the model tells the view to update, and the model is pushed by the controller. Subclassed into EntityView, and so forth. While the model contains references to this, this is distinctly separate from the model, as the model mustn’t know how to render itself. This is the interface which the basic things in the model uses to push to the view. 
+\newpage
+** View 
+*** Overview
+Something which the model calls to update itself to the viewable display of the User.  It knows how to draw the model of which it represents, and it writes it to the Graphics.  Once done, it does not need to return anything;  The graphics has been written to, and the remaining views can continue to write to that Graphics.  Once the Graphics has completed writing to all the views, the graphics is used in the paintComponent(Graphics g) method of the Layout of which it is being managed by, then finally presented to the User.
+        
+*** Responsibilities
+         1. Knows how to draw the piece of the model that calls it.
+*** Collaborators
+         1. (a model thing)
+*** UML class diagram
+{{abstract}}
+         - render(g: Graphics)
+*** Implementor
+        Daniel
+*** Tester
+        Daniel
+
+
+\newpage
+
+
+
+
+** EntityView 
+*** Overview
+        Knows how to draw render the Entity.  Entity sends this messages to indicate what kind of Entity image to display.  An entity in the Frozen state will send this a message called displayFrozenEntity() that will then request that the Entity View draws a different model.
+*** Responsibilities
+         1. Knows how to draw the piece of the model that calls it.
+*** Collaborators
+         1. Entity
+
+
+*** UML class diagram
+extends View
+
+
+         - displayFrozenEntity(gameX: int, gameY: int) // &c.
+*** Implementor
+        Daniel
+*** Tester
+        Daniel
+
+
+        
+\newpage
+** TileView 
+*** Overview
+        It renders a specific tile.
+*** Responsibilities
+Knows how to draw the piece of the model that calls it.
+*** Collaborators
+        Tile
+
+
+*** UML class diagram
+extends View
++displayLavaTile(gameX: int, gameY: int) // etc.
+
+
+*** Implementor
+        Daniel
+*** Tester
+        Daniel
+
+
+\newpage
+
+
+** ItemView 
+*** Overview
+        Knows how to draw a specific item.
+*** Responsibilities
+Knows how to draw the piece of the model that calls it.
+*** Collaborators
+        Item
+*** UML class diagram
+extends View
+
+
+
+
+*** Implementor
+Daniel
+*** Tester
+        Daniel
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+** Decal
+*** Overview
+Some triggers have an associated ‘Decal’ with their display.  Example images of decals are (skull & crossbones, heart, and red cross).  These are present for the ViewTriggerDecorator to display the appropriate graphic.  
+*** Responsibilities
+         1. Maintains a TriggerView
+         2. Forwards behavioral requests to the Trigger it wraps
+*** Collaborators
+         1. TriggerView
+         2. StructuredMap
+*** UML class diagram
+         - image: Image // doesn’t have to be an Image, could be any graphic?
+         - getImage(): Image
+*** Implementor
+Daniel
+*** Tester
+        Daniel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+** TriggerView
+*** Overview
+        Represents a specific trigger in the view.
+*** Responsibilities
+         1. Knows how to draw the piece of the model that calls it.
+*** Collaborators
+         1. ViewableTriggerDecorator
+
+
+*** UML class diagram
+extends View
+         - update()
+         - getImage():img
+*** Implementor
+Daniel
+*** Tester
+        Daniel
+
+
+        
+\newpage
+** InventoryView
+*** Overview
+Contains multiple specialized buttons that render an Item view.  Presents the Inventory of a Avatar.
+*** Responsibilities
+         1. Display an entitity’s inventory.
+         2. Have buttons for each item
+*** Collaborators
+         1. Inventory
+         2. Button
+         3. TextLabel (Inventory)
+*** UML class diagram
+
+
+*** Implementor
+        Daniel
+*** Tester
+        Daniel
+\newpage
+** GameMapView
+*** Overview
+GameMapView is the view that is responsible for combining all the hexagonal tiles, the Items, and the Entities.  
+*** Responsibilities
+         1. Display the GameMap model in the Graphics
+*** Collaborators
+         1. TileView
+         2. ItemView
+         3. EntityView
+         4. LightView
+*** UML class diagram
+ + add/registerItemView(itemView: ItemView)
+ + add/registerEntityView(entityView: EntityView)
+ + add/registerLightView(lightView: LightView)
+ + add/registerTileView(TileView: TileView)
+*** Implementor
+Daniel        
+*** Tester
+Daniel
+\newpage
+** EquipmentView
+*** Overview
+Contains the views for the slots that the Equipment that the Avatar uses.
+*** Responsibilities
+         1. Shows each piece of equipment in an EquipmentManager.
+         2. Provides buttons for each element in the EquipmentManager that can be pressed.
+*** Collaborators
+         1. EquipmentManager
+         2. ItemView
+         3. TextLabel (Equipment)
+*** UML class diagram
+
+
+         - updateArmorSlot(Armor);
+         - updateHelmetSlot(Helmet);
+         - updateWeaponSlot(Weapon);
+         - updateBootsSlot(Boots);
+         - updateGlovesSlot(Gloves);
+         - updateLeggingsSlot(Leggings);
+         - updateProjectileSlot(Projectile);
+         - updateShield(Shield);
+*** Implementor
+        Daniel
+*** Tester
+        Daniel
+\newpage
+* Subsystem 2.3: Camera
+*** Overview
+This subsystem represents the portion of the model that the user is currently able to see. This may be centered on the location of the avatar, or it may be detached from the avatar and moved around freely. This subsystem is only active when the game is in the gameplay state. 
+
+
+
+
+\newpage
+
+
+** Camera
+*** Overview
+Represents the open view of the player.
+*** Responsibilities
+         1. Limits rendering views to the appropriate viewing area.
+         2. Forwards rendering requests to all non-HUD view components.
+*** Collaborators
+         1. GameMapView
+         2. EntityView
+*** UML class diagram
+         - update(Location): void
+*** Implementor
+Daniel
+*** Tester
+Daniel
+\newpage
+
+
+* Subsystem 2.3: Stats and other Views
+*** Overview
+This is the subsystem of views that the player can see his stats and other things.
+\newpage
+
+
+** StatsView
+*** Overview
+Represents the view of the avatars Stats.
+*** Responsibilities
+         1. Limits rendering views to the appropriate viewing area.
+         2. Forwards rendering requests to all non-HUD view components.
+*** Collaborators
+         1. GameMapView
+         2. EntityView
+*** UML class diagram
+         - updateStrength()
+         - …  other stats
+*** Implementor
+        Daniel
+*** Tester
+        Daniel
+\newpage
+
+
+* Subsystem 3: Controller
+*** SubSystem Overview
+
+
+Controllers are to represent the ‘C’ in the MVC Pattern.  They are to listen and interpret input, and send it along to the Model.  Each State in the game has an associated Controller.  
+
+
+\newpage
+
+
+** MainMenuController
+*** Overview 
+The controller associated with the Main Menu.
+*** Responsibilities
+         1. Handle control logic for the Main Menu.
+*** Collaborators
+         1. MainMenuLayout
+*** UML class diagram
+         - setLayout(JPanel) : void
+         - newGame(): void
+         - loadGame(): void
+         - exitGame(): void
+         - Model
+*** Implementor
+        Kyle
+*** Tester
+        Kyle
+\newpage
+** CharacterSelectionMenuController
+*** Overview 
+The controller associated with the Character Selection Menu.
+*** Responsibilities
+         1. Handle control logic for the Character Selection screen.
+*** Collaborators
+         1.  CharacterSelectionLayout
+*** UML class diagram
+         - setLayout(JPanel) : void
+         - selectSmasher(): void
+         - selectSummoner(): void
+         - selectSneak(): void
+         - goBack(): void
+         - Model
+*** Implementor
+        Kyle
+*** Tester
+        Kyle
+\newpage
+
+
+** LoadMenuController
+*** Overview 
+The controller associated with the Load Menu.
+*** Responsibilities
+         1. Handle control logic for the Load screen.
+*** Collaborators
+         1.  LoadMenuLayout
+*** UML class diagram
+         - setLayout(JPanel) : void
+         - selectSlot(int): void
+         - loadGame(): void
+         - goBack(): void
+         - Model
+*** Implementor
+        Kyle
+*** Tester
+        Kyle
+\newpage
+
+
+** SaveMenuController
+*** Overview 
+The controller associated with the Save Menu.
+*** Responsibilities
+         1. Handle control logic for the Save screen.
+*** Collaborators
+         1. SaveMenuLayout
+*** UML class diagram
+         - setLayout(JPanel) : void
+         - selectSlot(int): void
+         - saveGame(): void
+         - goBack(): void
+         - Model
+*** Implementor
+        Kyle
+*** Tester
+        Kyle
+\newpage
+
+
+** PauseMenuController
+*** Overview 
+The controller associated with the Pause Menu.
+*** Responsibilities
+         1. Handle control logic for the Pause screen.
+*** Collaborators
+         1. PauseMenuLayout
+*** UML class diagram
+         - setLayout(JPanel) : void
+         - selectOptions(): void
+         - selectSaveGame(): void
+         - selectLoadGame(): void
+         - selectResume(): void
+         - selectMainMenu(): void
+         - Model
+*** Implementor
+        Kyle
+*** Tester
+        Kyle
+\newpage
+** SkillsMenuController
+*** Overview 
+The controller associated with the Skills Menu.
+*** Responsibilities
+         1. Handle control logic for the Skills screen.
+*** Collaborators
+         1. SkillsMenuLayout
+*** UML class diagram
+         - setLayout(JPanel) : void
+         - incrementSkill(int): void
+         - goBack(): void
+         - Model
+*** Implementor
+        Kyle
+*** Tester
+        Kyle
+\newpage
+** InventoryMenuController
+*** Overview 
+The controller associated with the Inventory Menu.
+*** Responsibilities
+         1. Handle control logic for the Inventory screen.
+*** Collaborators
+         1. InventoryMenuLayout
+*** UML class diagram
+         - setLayout(JPanel) : void
+         - selectItem(int): void
+         - goBack(): void
+         - Model
+*** Implementor
+        Kyle
+*** Tester
+        Kyle
+\newpage
+** GameplayController
+*** Overview 
+The controller for the main gameplay. 
+*** Responsibilities
+         1. Encapsulate the individual controllers that make up the control of the game.
+*** Collaborators
+         1. GameplayLayout
+         2. MountController
+         3. AvatarController
+         4. CameraController
+         5. Model
+*** UML class diagram
+         - getMountController(): MountController
+         - getAvatarController(): AvatarController
+         - getCameraController(): CameraController
+*** Implementor
+        Kyle
+*** Tester
+        Kyle
+\newpage
+
+
+** MountController
+*** Overview 
+Controller for handling the Avatar when it is on a mount. Associates keys with movement.
+*** Responsibilities
+         1. Controls the mount.
+*** Collaborators
+         1. Mount
+*** UML class diagram
+         - setKeyBindings()
+*** Implementor
+        Kyle
+*** Tester
+        Kyle
+\newpage
+
+
+** CameraController
+*** Overview 
+The controller for moving the camera. The keys for camera movement are the same as regular movement plus a meta-key modifier.
+*** Responsibilities
+         1. Controls the camera.
+*** Collaborators
+         1. Camera
+*** UML class diagram
+         - setKeyBindings()
+*** Implementor
+        Kyle
+*** Tester
+        Kyle
+\newpage
+
+
+** TradeMenuController
+*** Overview 
+The controller for the state associated with trading with an NPC.
+*** Responsibilities
+         1. Handle the control of trade.
+*** Collaborators
+         1. Inventory
+         2. Model
+*** UML class diagram
+         - sellItem(int): void
+         - buyItem(int): void
+         - goBack(): void
+*** Implementor
+        Kyle
+*** Tester
+        Kyle
+\newpage
+
+
+** EntityController
+*** Overview 
+Controls Entities.
+*** Responsibilities
+         1. Controls the Entity
+*** Collaborators
+         1. Entity
+*** UML class diagram
+         - setKeyBindings()
+*** Implementor
+        Kyle
+*** Tester
+        Kyle
+\newpage
+
+
+
+
+** Listener
+*** Overview
+        When the key given is pressed, calls the ability it contains.
+*** Responsibilities
+         - Moving shit when the key it’s registered to is pressed.
+*** Collaborators
+         - JPanel
+         - Ability
+*** UML class diagram
+         - Listener(KeyStroke, Ability) //Constructor
+         - addAsBinding(JPanel)
+*** Implementor
+        Kyle
+*** Tester
+        Kyle
+\newpage
+
+
+** DialogController
+*** Overview
+        When the User enters text into the DialogView, it will be passed here to the Dialog, so that when on Enter, it will appear on the View.
+*** Responsibilities
+         - Moving text to the ModelDialog
+*** Collaborators
+         - JTextField
+         - Dialog (Model)
+*** UML class diagram
+         - getText();
+*** Implementor
+        Kyle
+*** Tester
+        Kyle
+\newpage
+
+
+* 1.12 Subsystem KeyPreferences
+*** Overview
+The key preferences system holds a users preferences that map keys to each conceptual action. These preferences will map a certain key to walk up, another key to use ability 2, and so on. 
+\newpage
+** KeyPreferences
+*** Overview
+The key preferences system holds a users preferences that map keys to each conceptual action. These preferences will map a certain key to walk up, another key to use ability 2, and so on. 
+*** Responsibilities
+         1. Map a key to a certain action to be taken on the current unit
+         2. Provide an interface to change which keys map to which action. 
+*** Collaborators
+         1. StructuredMap
+
+
+*** UML class diagram
+         - getUpKey():KeyStroke
+         - getDownKey():KeyStroke
+         - …
+         - getMoveDownRightKey():KeyStroke
+         - getAbility1Key():KeyStroke
+         - ….
+         - getAbility9Key():KeyStroke
+         - getAttackKey():KeyStroke
+         - …
+         - getMenuMoveUpKey():KeyStroke
+         - getMenuMoveDownKey():KeyStroke
+         - getMenuMoveLeftKey():KeyStroke
+         - getMenuMoveRightKey():KeyStroke
+         - getMenuSelectKey():KeyStroke
+         - save() : StructuredMap
+         - load(StructuredMap):  
+*** Implementor
+Kyle
+*** Tester
+        Kyle
+\newpage
+
+
+* Subsystem 4: RunGame
+*** Subsystem Overview
+This subystem will contain the entry point of the program and will be responsible for loading all the view, model, and controller and run a loop that periodically calls update on the model.
+\newpage
+
+
+** RunGame
+*** Overview
+This class will be responsible for creating a gameObject, which is a runnable, and throwing it into a thread.
+        
+*** Responsibilities
+         1. Start the gameObject
+*** Collaborators
+         1. GameObject
+*** UML class diagram
+         - gameObject: GameObject
+         - main(): void
+*** Implementor
+        JR
+*** Tester
+        JR
+\newpage
+
+
+** GameObject
+*** Overview
+This class will be responsible for containing the model object, the controller, and the view. It will periodically call update on the model to signal a “gameTick”
+        
+*** Responsibilities
+         1. Start the gameObject
+         2. Periodically call update on the Model
+*** Collaborators
+         1. GameObject
+*** UML class diagram
+{{ Implements Runnable }}
+         - model: Model
+         - view: View
+         - controller: 
+         - run(): void
+*** Implementor
+        JR
+*** Tester
+        JR
