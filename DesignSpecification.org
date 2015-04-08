@@ -6,7 +6,7 @@
 
 
 \newpage
-* Subsystem 1: Model
+* Subsystem Model
 
 
 
@@ -53,7 +53,7 @@ The model provides an interface for the view and controller to interact with. It
 *** Tester
         Josh
 \newpage
-* Subsystem 1.1: Entity
+* Subsystem  Entity
 *** Overview
         An entity is a mobile thing, either an Avatar or an NPC or a Mount that has the ability to move itself. It keeps track of its own location on the map and the direction it is facing. An Entity has a name, EntityStatistics, set of Abilities, an Inventory, and an EquipmentManager. Entities are managed by the EntityManager.
 \newpage
@@ -354,7 +354,7 @@ Extends Avatar
 
 \newpage
 
-* Subsystem 1.1: Abilities and Skills
+* Subsystem Abilities and Skills
 *** Overview
         An ability is an abstract class with a perform method. When called, it does something, such as making a fireball, or raising stats, etc. 
 EX) Fireball Ability might create a fireball with damage based on the bane skill. 
@@ -472,7 +472,7 @@ extends SkillManager
 *** Tester
         Josh
 \newpage
-* Subsystem 1.2: Map
+* Subsystem  Map
 *** Overview
         This system concerns itself with a collection of tiles, which are the physical terrain.
 \newpage
@@ -624,7 +624,7 @@ Matt
 *** Tester
 Matt
 \newpage
-* Subsystem 1.3: Triggers
+* Subsystem Triggers
 *** Overview
 The trigger system is the primary way that events are applied to entities.They come into action whenever a geometric area of influence is entered. Once this occurs, an event is spawned and pushed to the EventManager which carries out the actual actions.  A TriggerManager checks every ‘tick’ of the game to see if there is an Entity who has entered a Trigger’s Geometry.  If it has, then the Trigger in question spawns an event, targeted at that Entity, and forwards that to the EventManager.
 
@@ -808,7 +808,7 @@ Kyle
 \newpage
 
 
-* Subsystem 1.4: Area of Influence
+* Subsystem  Area of Influence
 *** Overview
 The Area of Influence system is supported by a few Area abstractions that are used in a few contexts to determine whether or not a location or set of locations is within an area  of influence. Primarily used for light sources and triggers.
 \newpage
@@ -942,7 +942,7 @@ Kyle
 
 
 \newpage
-* Subsystem 1.5: Events
+* Subsystem Events
 *** Overview
 Events are objects that perform an action at one time or over a period of time when created. These events will be tied to triggers which are specific areas on the map that fire an event when triggered. There will be many different subclasses of events that have the ability to perform a variety of actions. There might be a StatModifierEvent that heals an entity over a period of time or a button pressed event that plays music when activated. The possibilities are endless with this system. Having this abstraction gives us a lot of power and it’ll allow us to create a very dynamic game that is fun to play.  They are managed by the EventManager, who dispatches their effects to the Entities that they target.
 
@@ -1205,7 +1205,7 @@ Josh
 \newpage
 
 
-* Subsystem 1.6: Items
+* Subsystem Items
 *** Overview
  These in general are “things” in the game. Items can be touched and used. Items in the game fall under a few separate categories. OneShot items are ones that are activated on touch and then cease to exist, these will not be in our item hierarchy they will instead be handled as one time triggers. Obstacle items are items that block the pathway of a player. Interactive items are items that perform some action when they are touched. Takeable items fall into two categories: items that can be “used” and items that are equipment (their “use” is to be equipped).
 
@@ -1557,7 +1557,7 @@ Joe
 *** Tester
         Joe
 \newpage
-* Subsystem 1.7: Projectiles
+* Subsystem Projectiles
 *** Overview
 Projectiles are moving things that cause an effect when the collide with either an entity or are blocked by an impassable tile such as a mountain. 
 \newpage
@@ -1857,7 +1857,7 @@ Allows an Avatar to trade with the NPC.  It allows a transaction between the Ava
 *** Tester
         Joe
 \newpage
-* SubSystem 1.9: Behaviors
+* SubSystem Behaviors
 *** Overview
 Behaviors are Entity states, these can be applied by items, spells, other Behaviors, engagements, and other things.
 
@@ -2313,7 +2313,7 @@ A source of light that does move
 *** Tester
         Matt
 \newpage
-* Subsystem 1.11: Statistics
+* Subsystem Statistics
 *** Overview
 Statistics are used to represent the power and skill of an entity or item. 
 \newpage
@@ -2369,7 +2369,7 @@ Extends Statistics
 \newpage
 
 
-* Subsystem 1.12.1 State Machinery
+* Subsystem State Machinery
 *** Overview
 Much of the game is driven by a number of state machines. These state machines allow states to be pushed, popped, and swapped. There are 3 subcategories of states: GameStates, which handle transitions between menus, NPCStates, which determine entity behavior, and AvatarStates which modify an Avatar’s behavior.
 \newpage
@@ -2410,23 +2410,23 @@ State is an interface for providing uniform functionality to specific kinds of s
 *** Tester
         JR
 \newpage
-* SubSubSystem 1.12.2 GameStates
-*** Overview
+** SubSubSystem GameStates
+**** Overview
 Menu transitions & popup dialogues are handled by game state transitions. These are all held by a StateMachine<GameState> within the model.
 
 
 \newpage
 
 
-** GameState
-*** Overview
+*** GameState
+**** Overview
 A game state is associated with the current view layout & controller. As game states are transitioned, we are generally moving from menu to menu.
-*** Responsibilities
+**** Responsibilities
          1. Present a new view layout (or overlay, in the case of inventory/shops/etc)
          2. Setup control logic for the current view
-*** Collaborators
+**** Collaborators
          1. StateMachine<GameState>
-*** UML class diagram
+**** UML class diagram
 implements State
          - onEnter(): void //initialize and attach a view layout object
          - onPause(): void 
@@ -2434,89 +2434,89 @@ implements State
          - onExit(): void
        # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
        # getController(): (Controller??) {{Abstract}}
-*** Implementor
+**** Implementor
         JR
-*** Tester
+**** Tester
         JR
 
 
 \newpage
 
 
-** MainMenuState
-*** Overview
+*** MainMenuState
+**** Overview
 The game state associated with the Main Menu.
-*** Responsibilities
+**** Responsibilities
          1. Register the MainMenuLayout in the view.
          2. Instantiate and register the MainMenuController.
-*** Collaborators
+**** Collaborators
          1. StateMachine<GameState>
-*** UML class diagram
+**** UML class diagram
 extends GameState
        # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
        # getController(): (Controller??) {{Abstract}}
-*** Implementor
+**** Implementor
         JR
-*** Tester
+**** Tester
         JR
 
 
 \newpage
 
 
-** CharacterSelectionMenuState
-*** Overview
+*** CharacterSelectionMenuState
+**** Overview
 The game state associated with a new game in which a player selects a new character. Can be reached only from the Main Menu.
-*** Responsibilities
+**** Responsibilities
          1. Register the CharacterSelectionMenuLayout in the view.
          2. Instantiate and register the CharacterSelectionMenuController.
-*** Collaborators
+**** Collaborators
          1. StateMachine<GameState>
-*** UML class diagram
+**** UML class diagram
 extends GameState
        # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
        # getController(): (Controller??) {{Abstract}}
-*** Implementor
+**** Implementor
         JR
-*** Tester
+**** Tester
         JR
 
 
 \newpage
-** LoadGameMenuState
-*** Overview
+*** LoadGameMenuState
+**** Overview
 The game state associated with the “Load Game” menu. Can be reached from the Main Menu and from the Pause Menu.
-*** Responsibilities
+**** Responsibilities
          1. Register the LoadGameMenuLayout in the view.
          2. Instantiate and register the LoadGameMenuController.
-*** Collaborators
+**** Collaborators
          1. StateMachine<GameState>
-*** UML class diagram
+**** UML class diagram
 extends GameState
        # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
        # getController(): (Controller??) {{Abstract}}
-*** Implementor
+**** Implementor
         JR
-*** Tester
+**** Tester
         JR
 
 
 \newpage
-** SaveGameMenuState
-*** Overview
+*** SaveGameMenuState
+**** Overview
 The game state associated with the “Save Game” menu. Can only be reached from the Pause Menu.
-*** Responsibilities
+**** Responsibilities
          1. Register the SaveGameMenuLayout in the view.
          2. Instantiate and register the LoadGameMenuController.
-*** Collaborators
+**** Collaborators
          1. StateMachine<GameState>
-*** UML class diagram
+**** UML class diagram
 extends GameState
        # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
        # getController(): (Controller??) {{Abstract}}
-*** Implementor
+**** Implementor
         JR
-*** Tester
+**** Tester
         JR
 
 
@@ -2527,35 +2527,35 @@ extends GameState
 \newpage
 
 
-** OptionsMenuState
-*** Overview
+*** OptionsMenuState
+**** Overview
 The game state associated with an open options menu. Options can be accessed from the Pause Menu.
-*** Responsibilities
+**** Responsibilities
          1. Register the OptionsMenuLayout in the view.
          2. Instantiate and register the PauseMenuController.
-*** Collaborators
+**** Collaborators
          1. StateMachine<GameState>
-*** UML class diagram
+**** UML class diagram
 extends GameState
        # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
        # getController(): (Controller??) {{Abstract}}
-*** Implementor
+**** Implementor
         JR
-*** Tester
+**** Tester
         JR
 
 
 \newpage
-** GameplayState
-*** Overview
+*** GameplayState
+**** Overview
 The game state associated with actual gameplay. Can be entered only after loading a game which occurs after the LoadGameMenu state or after the CharacterSelectionMenu state (which also loads a preconfigured game save).
-*** Responsibilities
+**** Responsibilities
          1. Register the GameplayLayout in the view.
          2. Instantiate and register the GameplayController.
          3. Accepts Views from the Model, and pushes them up to the GameplayLayout
-*** Collaborators
+**** Collaborators
          1. StateMachine<GameState>
-*** UML class diagram
+**** UML class diagram
 extends GameState
        # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
        # getController(): (Controller??) {{Abstract}}
@@ -2563,111 +2563,111 @@ extends GameState
        + add/registerEntityView(entityView: EntityView)
        + add/registerLightView(lightView: LightView)
        + add/registerTileView(TileView: TileView)
-*** Implementor
+**** Implementor
         JR
-*** Tester
+**** Tester
         JR
 
 
 \newpage
-** PauseMenuState
-*** Overview
+*** PauseMenuState
+**** Overview
 The game state associated with an open Pause Menu. Acts as a pop-up, rather than completely replacing the previous view. Provides access to other menus--Load Game, Save Game, Options, Main Menu, and a Resume Gameplay button that takes you back to gameplay.
-*** Responsibilities
+**** Responsibilities
          1. Register the PauseMenuLayout in the view.
          2. Instantiate and register the PauseMenuController.
-*** Collaborators
+**** Collaborators
          1. StateMachine<GameState>
-*** UML class diagram
+**** UML class diagram
 extends GameState
          - onEnter(): void //overrides normal view behavior to overlay instead
          - onExit(): void //removes popup layer
        # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
        # getController(): (Controller??) {{Abstract}}
-*** Implementor
+**** Implementor
         JR
-*** Tester
+**** Tester
         JR
 
 
 \newpage
-** InventoryMenuState
-*** Overview
+*** InventoryMenuState
+**** Overview
 The game state associated with an open Inventory Menu. Acts as a pop-up, rather than completely replacing the previous view.
-*** Responsibilities
+**** Responsibilities
          1. Register the InventoryMenuLayout in the view.
          2. Instantiate and register the InventoryMenuController.
-*** Collaborators
+**** Collaborators
          1. StateMachine<GameState>
-*** UML class diagram
+**** UML class diagram
 extends GameState
          - onEnter(): void //overrides normal view behavior to overlay instead
          - onExit(): void //removes popup layer
        # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
        # getController(): (Controller??) {{Abstract}}
-*** Implementor
+**** Implementor
         JR
-*** Tester
+**** Tester
         JR
 
 
 \newpage
-** TradeMenuState
-*** Overview
+*** TradeMenuState
+**** Overview
 The game state associated with an open trading menu. Acts as a pop-up, rather than completely replacing the previous view.
-*** Responsibilities
+**** Responsibilities
          1. Register the TradeMenuLayout in the view.
          2. Instantiate and register the TradeMenuController.
-*** Collaborators
+**** Collaborators
          1. StateMachine<GameState>
-*** UML class diagram
+**** UML class diagram
 extends GameState
          - onEnter(): void //overrides normal view behavior to overlay instead
          - onExit(): void //removes popup layer
        # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
        # getController(): (Controller??) {{Abstract}}
-*** Implementor
+**** Implementor
         JR
-*** Tester
+**** Tester
         JR
 
 
 \newpage
-** SkillsMenuState
-*** Overview
+*** SkillsMenuState
+**** Overview
 The game state associated with an open skills menu. Acts as a pop-up, rather than completely replacing the previous view.
-*** Responsibilities
+**** Responsibilities
          1. Register the SkillsMenuLayout in the view.
          2. Instantiate and register the SkillsMenuController.
-*** Collaborators
+**** Collaborators
          1. StateMachine<GameState>
-*** UML class diagram
+**** UML class diagram
 extends GameState
          - onEnter(): void //overrides normal view behavior to overlay instead
          - onExit(): void //removes popup layer
        # getViewLayout(): ViewLayout / (JPanel?), {{Abstract}}
        # getController(): (Controller??) {{Abstract}}
-*** Implementor
+**** Implementor
         JR
-*** Tester
+**** Tester
         JR
 
 
 \newpage
 
 
-* SubSubSystem 1.13 Loading / Saving
-*** Overview
+** SubSubSystem Loading / Saving
+**** Overview
 This system covers utility classes for loading and saving the state of the game. We use a JSON parser to produce a helper object of type StructuredMap. The StructuredMap’s role is to provided typed access to saved data from the JSON.
 \newpage
-** StructuredMap
-*** Overview
+*** StructuredMap
+**** Overview
 StructuredMaps are simply hashmaps of String to a structured map type that provide typed access to the different objects they hold.
-*** Responsibilities
+**** Responsibilities
          1. Act as a DAO.
-*** Collaborators
+**** Collaborators
 None.
-*** UML class diagram
+**** UML class diagram
 + put(): void
 + getString(key : String): String
 + getDouble(key : String): Double
@@ -2678,76 +2678,76 @@ None.
 + getIntArray(key : String): int[]
 + getDoubleArray(key : String): double[]
 + getKeys(): Set<String>
-*** Implementor
+**** Implementor
 Daniel
-*** Tester
+**** Tester
 Daniel
 \newpage
-** JSONParser
-*** Overview
+*** JSONParser
+**** Overview
 This is a utility class that parses JSON. It converts a JSONToken stream into a StructuredMap.
-*** Responsibilities
+**** Responsibilities
          1. Parse JSON and return a StructuredMap
-*** Collaborators
+**** Collaborators
          1. JSONScanner
          2. JSONToken
-*** UML class diagram
+**** UML class diagram
 + getStructuredMapFromJSON(String : json): StructuredMap
-*** Implementor
+**** Implementor
 Daniel
-*** Tester
+**** Tester
 Daniel
 \newpage
-** JSONScanner
-*** Overview
+*** JSONScanner
+**** Overview
 This class simply tokenizes JSON.
-*** Responsibilities
+**** Responsibilities
          1. Tokenize JSON.
-*** Collaborators
+**** Collaborators
          1. JSONScanner
          2. JSONToken
-*** UML class diagram
+**** UML class diagram
 + getTokens(String : json): Queue<JSONToken>
-*** Implementor
+**** Implementor
 Daniel
-*** Tester
+**** Tester
 Daniel
 \newpage
-** JSONToken
-*** Overview
+*** JSONToken
+**** Overview
 This is an enum of all valid JSON tokens.
-*** Responsibilities
+**** Responsibilities
          1. Represent JSON tokens.
-*** Collaborators
+**** Collaborators
 None.
-*** UML class diagram
+**** UML class diagram
 [  LBRACE, RBRACE, LBRACKET, RBRACKET, COLON, COMMA, TRUE, FALSE, NULL, STRING, DOUBLE, INTEGER ]
-*** Implementor
+**** Implementor
 Daniel
-*** Tester
+**** Tester
 Daniel
 \newpage
-** JSONFormatter
-*** Overview
+*** JSONFormatter
+**** Overview
 This class formats a StructuredMap into a String. Produces proper, tabbed, printable, JSON.
-*** Responsibilities
+**** Responsibilities
          1. Convert a StructuredMap into a String.
-*** Collaborators
+**** Collaborators
 None.
-*** UML class diagram
+**** UML class diagram
          - getStringRepresentation(StructuredMap): String
-*** Implementor
+**** Implementor
 Daniel
-*** Tester
+**** Tester
 Daniel
 \newpage
 
 
-* SubSubSystem 1.13 Dialog
-*** Overview
+** SubSubSystem Dialog
+**** Overview
 This is the Dialog that we can Log to the system to show on the DialogLayout.  Use this to talk to the Avatar.
 \newpage
-* Subsystem 2: View
+* Subsystem View
 *** Overview:
 The view is what the user interacts with. It will show a visible representation of a portion of model on the screen and will provide a panel for the controller to attach to and listen for key presses. This subsystem will consist of individual views that will be swapped out at runtime depending on the state of the game. 
 \newpage
@@ -2770,7 +2770,7 @@ Daniel
 
 
 \newpage
-* Subsystem 2.1: View Layouts
+* Subsystem View Layouts
 *** Overview
 Layouts are the top level containers associated with a particular menu / GameState.  Layouts extend JPanel, and thus can display different views.  Some Layouts (such as Layouts with menus), can be decorated with JComponents (or ViewComponents).  Menu Layouts use the Mouse to advance to the next State and Layout.  
 \newpage
@@ -2995,7 +2995,7 @@ Displays a the list of options and Controllers for the User to adjust to their k
 *** Tester
 Daniel
 \newpage
-* Subsystem 2.2: View Components
+* Subsystem View Components
 *** Overview
 Reusable view components used across various other views & layouts.
 \newpage
@@ -3079,7 +3079,7 @@ Daniel
 
 
 
-* SubSubSystem 2.2.1 Basic Views
+* SubSystem Basic Views
 *** Overview
 Something which things that are visible in the model contain, which they can use to tell the view to update, following MVC where the model tells the view to update, and the model is pushed by the controller. Subclassed into EntityView, and so forth. While the model contains references to this, this is distinctly separate from the model, as the model mustn’t know how to render itself. This is the interface which the basic things in the model uses to push to the view. 
 \newpage
@@ -3321,7 +3321,7 @@ Contains the views for the slots that the Equipment that the Avatar uses.
 *** Tester
         Daniel
 \newpage
-* Subsystem 2.3: Camera
+* Subsystem Camera
 *** Overview
 This subsystem represents the portion of the model that the user is currently able to see. This may be centered on the location of the avatar, or it may be detached from the avatar and moved around freely. This subsystem is only active when the game is in the gameplay state. 
 
@@ -3349,7 +3349,7 @@ Daniel
 \newpage
 
 
-* Subsystem 2.3: Stats and other Views
+* Subsystem Stats and other Views
 *** Overview
 This is the subsystem of views that the player can see his stats and other things.
 \newpage
@@ -3374,7 +3374,7 @@ Represents the view of the avatars Stats.
 \newpage
 
 
-* Subsystem 3: Controller
+* Subsystem Controller
 *** SubSystem Overview
 
 
@@ -3643,7 +3643,7 @@ Controls Entities.
 \newpage
 
 
-* 1.12 Subsystem KeyPreferences
+* Subsystem KeyPreferences
 *** Overview
 The key preferences system holds a users preferences that map keys to each conceptual action. These preferences will map a certain key to walk up, another key to use ability 2, and so on. 
 \newpage
@@ -3681,7 +3681,7 @@ Kyle
 \newpage
 
 
-* Subsystem 4: RunGame
+* Subsystem RunGame
 *** Subsystem Overview
 This subystem will contain the entry point of the program and will be responsible for loading all the view, model, and controller and run a loop that periodically calls update on the model.
 \newpage
