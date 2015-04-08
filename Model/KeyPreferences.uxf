@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>20</x>
-      <y>120</y>
+      <x>930</x>
+      <y>0</y>
       <w>210</w>
       <h>170</h>
     </coordinates>
@@ -20,5 +20,97 @@
 +save() : StructureMap
 +load(map: StructedMap)</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>30</y>
+      <w>390</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>CentralController
+--
+-panel : JPanel
+-view : View
+--
++updateBindings()
+-setListenersToView(listeners: List&lt;Listener&gt;, view: JPanel)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>230</y>
+      <w>390</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>CentralViewController
+--
+-panel : JPanel
+-view : View
+--
++updateBindings()
+-setListenersToView(listeners: List&lt;Listener&gt;, view: JPanel)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>140</y>
+      <w>30</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>230</y>
+      <w>390</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>CentralGamePlayController
+--
+-panel : JPanel
+-view : View
+--
++updateBindings()
+-setListenersToView(listeners: List&lt;Listener&gt;, view: JPanel)
+-fetchListeners(): List&lt;Listener&gt;
+-setListenersToView(listeners: List&lt;Listener&gt;, view: JPanel)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>820</x>
+      <y>230</y>
+      <w>230</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Listener
+--
+-ability : Ability
+-keyStroke: KeyStroke
+--
++updateBindings()
+addAsBinding(JPanel)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>350</x>
+      <y>140</y>
+      <w>230</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>210.0;10.0;10.0;90.0</additional_attributes>
   </element>
 </diagram>
