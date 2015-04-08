@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>280</y>
+      <x>60</x>
+      <y>340</y>
       <w>260</w>
       <h>90</h>
     </coordinates>
@@ -19,8 +19,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>280</y>
+      <x>340</x>
+      <y>340</y>
       <w>260</w>
       <h>170</h>
     </coordinates>
@@ -40,8 +40,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>550</x>
-      <y>280</y>
+      <x>610</x>
+      <y>340</y>
       <w>260</w>
       <h>80</h>
     </coordinates>
@@ -56,8 +56,8 @@ into text labels?</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
-      <y>140</y>
+      <x>230</x>
+      <y>200</y>
       <w>260</w>
       <h>90</h>
     </coordinates>
@@ -73,8 +73,8 @@ ImageButtonView
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
-      <y>220</y>
+      <x>350</x>
+      <y>280</y>
       <w>140</w>
       <h>80</h>
     </coordinates>
@@ -84,8 +84,8 @@ ImageButtonView
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
-      <y>220</y>
+      <x>180</x>
+      <y>280</y>
       <w>190</w>
       <h>80</h>
     </coordinates>

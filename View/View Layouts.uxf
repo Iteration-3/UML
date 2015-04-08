@@ -4,8 +4,8 @@
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>90</x>
-      <y>20</y>
+      <x>70</x>
+      <y>60</y>
       <w>1680</w>
       <h>280</h>
     </coordinates>
@@ -17,8 +17,8 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
-      <y>80</y>
+      <x>330</x>
+      <y>120</y>
       <w>210</w>
       <h>190</h>
     </coordinates>
@@ -28,30 +28,32 @@ CharacterSelectionLayout
 -TextLabel
 -MenuButton
 -CharacterButton
---</panel_attributes>
+--
+render()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
-      <y>80</y>
+      <x>10</x>
+      <y>410</y>
       <w>210</w>
       <h>190</h>
     </coordinates>
     <panel_attributes>
-MainMenuLayout
+Camera
 --
--TextLabel
--MenuButton
---</panel_attributes>
+-GameMapView
+-EntityView
+--
++update(Location)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>580</x>
-      <y>80</y>
+      <x>560</x>
+      <y>120</y>
       <w>210</w>
       <h>190</h>
     </coordinates>
@@ -61,14 +63,15 @@ LoadMenuLayout
 -TextLabel
 -MenuButton
 -SaveSlotButton
---</panel_attributes>
+--
+render()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>810</x>
-      <y>80</y>
+      <x>790</x>
+      <y>120</y>
       <w>210</w>
       <h>190</h>
     </coordinates>
@@ -79,15 +82,15 @@ InventoryMenuLayout
 -StatsView
 -InventoryView
 -EquipmentView
-
---</panel_attributes>
+--
+render()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1050</x>
-      <y>80</y>
+      <x>1030</x>
+      <y>120</y>
       <w>210</w>
       <h>190</h>
     </coordinates>
@@ -98,15 +101,15 @@ SkillsMenuLayout
 -SkillBarView
 -PlusButton
 -TextLabel
-
---</panel_attributes>
+--
+render()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1290</x>
-      <y>80</y>
+      <x>1270</x>
+      <y>120</y>
       <w>210</w>
       <h>190</h>
     </coordinates>
@@ -116,14 +119,15 @@ SaveMenuLayout
 -TextLabel
 -MenuButton
 -SaveSlotButton
---</panel_attributes>
+--
+render()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1530</x>
-      <y>80</y>
+      <x>1510</x>
+      <y>120</y>
       <w>210</w>
       <h>190</h>
     </coordinates>
@@ -134,8 +138,26 @@ GameplayLayout
 -LightMapView
 -EntityView
 -HUDView
-
---</panel_attributes>
+-DialogueView
+--
+render()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>100</x>
+      <y>120</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>
+MainMenuLayout
+--
+-TextLabel
+-MenuButton
+--
+render()</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
