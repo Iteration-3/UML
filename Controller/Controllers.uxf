@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>84</x>
+      <y>70</y>
+      <w>147</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>MainMenuController
+--
+-mainMenuLayout
+--
+setLayout(JPanel)
++newGame()
++loadGame()
++exitGame()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>252</x>
+      <y>70</y>
+      <w>182</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>CharacterSelectionMenuController
+--
+-characterSelectionLayout
+--
+setLayout(JPanel)
++selectSmasher()
++selectSummoner()
++selectSneak()
++goBack()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>70</y>
+      <w>126</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>LoadMenuController
+--
+-loadMenuLayout
+--
+setLayout(JPanel)
++selectSlot(int)
++loadGame()
++goBack()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>595</x>
+      <y>70</y>
+      <w>126</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>SaveMenuController
+--
+-saveMenuLayout
+--
+setLayout(JPanel)
++selectSlot(int)
++saveGame()
++goBack()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>735</x>
+      <y>70</y>
+      <w>126</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>GameplayController
+--
+-gameplayLayout
+--
+setLayout(JPanel)
+doAllThings()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>735</x>
+      <y>210</y>
+      <w>126</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>SkillsMenuController
+--
+-skillMenuLayout
+--
+setLayout(JPanel)
+incrementSkill(int)
+goBack()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>588</x>
+      <y>210</y>
+      <w>126</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>InventoryMenuController
+--
+-inventoryMenuLayout
+--
+setLayout(JPanel)
+selectItem(int)
+goBack()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>441</x>
+      <y>196</y>
+      <w>126</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>PauseMenuController
+--
+-pauseMenuLayout
+--
++setLayout(JPanel)
++selectOptions()
++selectSaveGame()
++selectLoadGame()
++selectResume()
++selectMainMenu()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1316</x>
+      <y>70</y>
+      <w>126</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>TradeMenuController
+--
+-tradeLayout
+--
++ sellItem(itemSlot: int)
++ buyItem(itemSlot: int)
++ goBack()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1463</x>
+      <y>70</y>
+      <w>126</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>DialogController
+--
+-tradeLayout
+--
++getText(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>84</x>
+      <y>203</y>
+      <w>147</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>EntityController
+--
+
+--
++setKeyBindings()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>266</x>
+      <y>196</y>
+      <w>140</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>CameraController
+--
+
+--
++ setKeyBindings()</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
